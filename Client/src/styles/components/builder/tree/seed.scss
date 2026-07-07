@@ -1,0 +1,13 @@
+.seed {
+    position: absolute;
+    z-index: 14;
+
+    width: clamp(20px, 3vw, 80px);
+    height: clamp(30px, 4.5vw, 120px);
+
+    top: calc(var(--seed-y) + var(--seed-offsetY, 0%));
+    left: var(--seed-x);
+    transform: translate(-50%, -50%);
+
+    transition: top 1.5s ease;
+}

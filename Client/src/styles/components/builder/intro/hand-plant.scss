@@ -1,0 +1,16 @@
+.hand-plant {
+    position: absolute;
+    z-index: 13;
+
+    width: clamp(200px, 55vw, 4000px);
+    height: clamp(100px, 28vw, 2000px);
+
+    top: calc(var(--hand-y) + var(--hand-offsetY, 0%));
+    left: var(--hand-x);
+
+    transform: translate(-50%, -50%);
+
+    transition: 
+        top 1.5s ease,
+        opacity 1.5s ease;
+}

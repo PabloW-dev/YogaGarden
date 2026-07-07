@@ -1,0 +1,235 @@
+.seed-step {
+    position: absolute;
+    z-index: 30;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    transition: opacity 1.5s ease;
+
+    width: var(--seed-step-w);
+    height: var(--seed-step-h);
+
+    top: 28%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.seed-step__name,
+.seed-step__objective,
+.seed-step__duration,
+.seed-step__level {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+
+.seed-step__name {
+    position: absolute;
+    top: 0;
+    left: 11%;
+}
+
+.seed-step__objective {
+    position: absolute;
+    top: 0;
+    right: 11%;
+}
+
+.seed-step__duration {
+    position: absolute;
+    top: 48%;
+    left: -18%;
+}
+
+.seed-step__level {
+    position: absolute;
+    top: 48%;
+    right: -18%;
+}
+
+.seed-step label,
+.seed-step span {
+    font-size: .9rem;
+    font-weight: 300;
+    letter-spacing: .25rem;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.70);
+}
+
+.seed-step input[type="text"] {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+
+    background: transparent;
+
+    padding: .4rem 0;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: .08rem;
+
+    color: rgba(0,0,0,.88);
+
+    outline: none;
+
+    transition:
+        border-color .25s ease,
+        opacity .25s ease;
+}
+
+.seed-step input[type="text"]:focus {
+    border-bottom-color: black;
+    color: black;
+}
+
+.seed-step input[type="text"]::placeholder {
+    color: rgba(0,0,0,.25);
+    text-transform: uppercase;
+    letter-spacing: .22rem;
+    font-weight: 300;
+    font-size: .85rem;
+    font-family: inherit;
+}
+
+
+.seed-step input[type="range"] {
+    width: 18rem;
+    opacity: .75;
+
+    transition: opacity .25s ease;
+}
+
+.seed-step input[type="range"]:hover {
+    opacity: 1;
+}
+
+
+.seed-step__level label {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.seed-step input[type="radio"] {
+    transform: scale(.8);
+}
+
+.seed-step__radio {
+    padding-left: 2rem;
+}
+
+.seed-step__radio input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.seed-step__radio svg {
+    width: 18px;
+    height: 18px;
+
+    .outer {
+        fill: none;
+        stroke: rgba(0,0,0,.45);
+        stroke-width: 2;
+    }
+
+    .inner {
+        fill: black;
+        opacity: 0;
+        transition: opacity .25s ease;
+    }
+}
+
+.seed-step__duration--wrapper {
+    position: relative;
+    width: 15rem;
+    height: 40px;
+}
+
+.seed-step__duration--input {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.seed-step__duration--input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 0;
+    height: 0;
+    border: none;
+    background: transparent;
+}
+
+.seed-step__duration--input::-webkit-slider-runnable-track {
+    background: transparent;
+    border: none;
+}
+
+.seed-step__duration--input::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    border: none;
+    background: transparent;
+}
+
+.seed-step__duration--input::-moz-range-track {
+    background: transparent;
+    border: none;
+}
+
+.seed-step__duration--svg {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    .track {
+        stroke: rgba(0,0,0,.25);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+    }
+
+    .thumb {
+        fill: black;
+
+        transition: cx .15s ease;
+    }
+}
+
+.seed-step__radio input:checked + svg .inner {
+    opacity: 1;
+}
+
+.seed-step input,
+.seed-step label,
+.seed-step span {
+    transition:
+        color .25s ease,
+        opacity .25s ease,
+        transform .25s ease;
+}

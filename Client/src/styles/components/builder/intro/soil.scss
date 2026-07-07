@@ -1,0 +1,14 @@
+.soil {
+    position: absolute;
+    z-index: 12;
+
+    width: clamp(80px, 12vw, 4000px);
+    height: clamp(40px, 6vw, 2000px);
+
+    top: var(--soil-y);
+    left: calc(var(--soil-x) + var(--soil-offsetX, 0%));
+
+    transform: translate(-50%, -50%);
+
+    transition: left 1.5s ease;
+}

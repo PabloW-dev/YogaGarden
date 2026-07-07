@@ -1,4 +1,5 @@
 //import useEffect para las animaciones + camara + SVG
+import { useCallback, useState } from "react";
 
 import TreeCanvas from "../../features/builder/components/tree/TreeCanvas";
 import ChakraGlow from "../../features/builder/components/general/ChakraGlow";
@@ -15,21 +16,26 @@ import { useBuilder } from "../../contexts/useBuilder";
 
 
 export default function BuilderPage() {
+  const [introFinished, setIntroFinished] = useState(false);
   const { step } = useBuilder();
+
+  const onIntroFinished = useCallback(() => {
+    setIntroFinished(true);
+  }, []);
 
   return (
     <div className="builder-page">
-      <ChakraGlow />
-      <TreeCanvas />
+      <ChakraGlow introFinished={introFinished} />
+      <TreeCanvas onIntroFinished={onIntroFinished} />
 
-      <StepIndicator currentStep={step} />
+      <StepIndicator currentStep={step} introFinished={introFinished} />
 
-      {step === 1 && <SeedStep />}
+      {step === 1 && <SeedStep introFinished={introFinished} />}
       {step === 2 && <OutbreakStep />}
       {step === 3 && <BranchStep />}
       {step === 4 && <TreeStep />}
       
-      <Navigation />
+      <Navigation introFinished={introFinished} />
       
       <FrontCanvas />
     </div>

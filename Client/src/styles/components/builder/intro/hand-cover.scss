@@ -1,0 +1,16 @@
+.hand-cover {
+    position: absolute;
+    z-index: 13;
+
+    width: clamp(200px, 60vw, 4000px);
+    height: clamp(100px, 20vw, 2000px);
+
+    top: var(--handCover-y);
+    left: calc(var(--handCover-x) + var(--hand-offsetX, 0%));
+
+    transform: translate(-50%, -50%);
+
+    transition: 
+        opacity 1.5s ease,
+        left 1.5s ease;
+}

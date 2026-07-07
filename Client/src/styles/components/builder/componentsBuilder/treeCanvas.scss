@@ -1,0 +1,46 @@
+@use "../../../mixins" as *;
+
+.tree-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+
+    --seed-x: 49%;
+    --seed-y: 54%;
+
+    --hand-x: 26.5%;
+    --hand-y: 28%;
+
+    --handCover-x: 93%;
+    --handCover-y: 63%;
+
+    --ground-y: 80%;
+
+    --soil-x: 58.5%;
+    --soil-y: 77%;
+
+    --Ocamera-x: 0px;
+    --Ocamera-y: 0px;
+
+    aspect-ratio: 16/8;
+
+    @include mobile {
+        --seed-x: 45.5%;
+        --seed-y: 39.7%;
+
+        --ground-y: 65%;
+
+        --handCover-y: 58%;
+
+        --soil-y: 63%;
+
+        aspect-ratio: 12/15;
+    }
+
+    @include tablet {
+        --seed-x: 45.5%;
+        --seed-y: 54%;
+
+        aspect-ratio: 6/3;
+    }
+}

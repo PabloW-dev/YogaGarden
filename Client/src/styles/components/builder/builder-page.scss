@@ -1,0 +1,28 @@
+@use "./componentsBuilder/chakra-glow.scss";
+@use "./componentsBuilder/treeCanvas.scss";
+@use "./componentsBuilder/stepIndicator.scss";
+@use "./componentsBuilder/seedStep.scss";
+@use "./componentsBuilder/outbreakStep.scss";
+@use "./componentsBuilder/branchStep.scss";
+@use "./componentsBuilder/treeStep.scss";
+@use "./componentsBuilder/navigation.scss";
+@use "./componentsBuilder/frontCanvas.scss";
+
+@use "./intro/ground.scss";
+@use "./intro/hand-plant.scss";
+@use "./intro/hand-cover.scss";
+@use "./intro/soil.scss";
+
+@use "./componentsBuilder/camera.scss";
+
+@use "./tree/seed.scss";
+
+.builder-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    --seed-step-w: 40%;
+    --seed-step-h: 40%;
+}

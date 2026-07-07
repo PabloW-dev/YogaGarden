@@ -1,0 +1,8 @@
+.ground {
+    position: absolute;
+    width: 2000px;
+    height: 2000px;
+    z-index: 11;
+
+    top: var(--ground-y);
+}

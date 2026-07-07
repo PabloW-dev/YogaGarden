@@ -1,0 +1,31 @@
+.step-indicator {
+    position: absolute;
+    
+    top: 15%;
+    left: 42.5%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    z-index: 20;
+
+    font-size: clamp(1rem, 1.4vw, 1.8rem);
+    font-weight: 300;
+    letter-spacing: .25rem;
+
+    color: rgba(0, 0, 0, .35);
+    
+    transition: opacity 1.5s ease;
+
+    span {
+        transition: 
+            color .35 ease,
+            transform .35s ease,
+            opacity .35s ease;
+    }
+
+    .active {
+        color: black;
+        transform: scale(1.15);
+    }
+}

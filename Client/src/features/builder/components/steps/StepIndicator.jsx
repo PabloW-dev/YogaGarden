@@ -1,10 +1,16 @@
 
 
-export default function StepIndicator({ currentStep }) {
+export default function StepIndicator({ currentStep, introFinished }) {
   const steps = [1, 2, 3, 4];
 
   return (
-    <div className="step-indicator">
+    <div className="step-indicator"
+      style={{
+        opacity: introFinished
+          ? "1"
+          : "0"
+      }}
+    >
       {steps.map((step, index) => (
         <span key={step}>
           <span
@@ -14,7 +20,7 @@ export default function StepIndicator({ currentStep }) {
           </span>
 
           {index < steps.length - 1 && (
-            <span>---</span>
+            <span> ···</span>
           )}
         </span>
       ))}
