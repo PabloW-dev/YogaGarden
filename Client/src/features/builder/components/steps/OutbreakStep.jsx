@@ -5,7 +5,7 @@ import SectionCard from "./SectionCard";
 
 
 
-export default function OutbreakStep() {
+export default function OutbreakStep({ transition }) {
   const [showPicker, setShowPicker] = useState(false);
 
   const [draggingIndex, setDraggingIndex] = useState(null);
@@ -45,7 +45,13 @@ export default function OutbreakStep() {
   }
 
   return (
-    <div className="outbreak-step">
+    <div className="outbreak-step"
+        style={{
+            opacity: !transition
+                ? "1"
+                : "0"
+        }}
+    >
       <div>
         <p>{`Class Duration: ${totalTime}`}</p>
         <p>{`Remaining: ${remainingTime}`}</p>

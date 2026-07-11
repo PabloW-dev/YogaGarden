@@ -6,8 +6,10 @@
     height: clamp(30px, 4.5vw, 120px);
 
     top: calc(var(--seed-y) + var(--seed-offsetY, 0%));
-    left: var(--seed-x);
+    left: calc(var(--seed-x) + var(--seed-offsetX, 0%));
     transform: translate(-50%, -50%);
 
-    transition: top 1.5s ease;
+    transition: 
+        top 1.5s ease,
+        left 1.5s ease;
 }

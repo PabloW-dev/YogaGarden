@@ -20,7 +20,7 @@ export default function Soil(props) {
           L0 60
           Z
         "
-        fill="#3f2714"
+        fill="#3A0603"
       />
     </svg>
   );

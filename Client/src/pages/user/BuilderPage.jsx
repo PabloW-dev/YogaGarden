@@ -17,25 +17,103 @@ import { useBuilder } from "../../contexts/useBuilder";
 
 export default function BuilderPage() {
   const [introFinished, setIntroFinished] = useState(false);
+  const [transition, setTransition] = useState(false);
+
   const { step } = useBuilder();
+
+  const [scene, setScene] = useState({
+
+    handPlanty: {
+      visible: 1,
+      offsetY: 0
+    },
+
+    handCoverx: {
+      visible: 0,
+      offsetX: 0,
+    },
+
+    seed: {
+      visible: 1,
+      offsetY: 0,
+      offsetX: 0
+    },
+
+    groundO: {
+      visible: 1,
+    },
+
+    soil: {
+      offsetX: 0
+    },
+
+    camera: {
+      x: 0,
+      y: 0,
+      zoom: 1
+    }
+
+  });
+
+
+  const updateScene = useCallback((key, data) => {
+
+    setScene(prev => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        ...data
+      }
+    }));
+  }, []);
 
   const onIntroFinished = useCallback(() => {
     setIntroFinished(true);
   }, []);
 
+  const onTransition = useCallback(() => {
+    setTransition(true);
+  }, []);
+
   return (
     <div className="builder-page">
       <ChakraGlow introFinished={introFinished} />
-      <TreeCanvas onIntroFinished={onIntroFinished} />
 
-      <StepIndicator currentStep={step} introFinished={introFinished} />
+      <TreeCanvas 
+        scene={scene} 
+        updateScene={updateScene} 
+        onIntroFinished={onIntroFinished} 
+      />
 
-      {step === 1 && <SeedStep introFinished={introFinished} />}
-      {step === 2 && <OutbreakStep />}
-      {step === 3 && <BranchStep />}
-      {step === 4 && <TreeStep />}
+      <StepIndicator 
+        currentStep={step} 
+        introFinished={introFinished} 
+        transition={transition}   
+      />
+
+      {step === 1 && <SeedStep 
+        introFinished={introFinished} 
+        transition={transition} 
+      />}
+
+      {step === 2 && <OutbreakStep 
+        transition={transition}  
+      />}
+
+      {step === 3 && <BranchStep 
+        transition={transition}  
+      />}
+      {step === 4 && <TreeStep
+        transition={transition} 
+      />}
       
-      <Navigation introFinished={introFinished} />
+      <Navigation 
+        updateScene={updateScene} 
+        introFinished={introFinished} 
+        onTransition={onTransition} 
+        transition={transition}
+        setTransition={setTransition} 
+      />
       
       <FrontCanvas />
     </div>

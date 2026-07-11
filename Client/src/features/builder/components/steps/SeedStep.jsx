@@ -1,6 +1,6 @@
 import { useBuilder } from "../../../../contexts/useBuilder";
 
-export default function SeedStep({ introFinished }) {
+export default function SeedStep({ introFinished, transition }) {
     const { seedData, setSeedData, outbreakData } = useBuilder();
 
     const usedTime = outbreakData.sections.reduce(
@@ -11,7 +11,7 @@ export default function SeedStep({ introFinished }) {
   return (
     <div className="seed-step"
         style={{
-            opacity: introFinished
+            opacity: introFinished && !transition
                 ? "1"
                 : "0"
         }}

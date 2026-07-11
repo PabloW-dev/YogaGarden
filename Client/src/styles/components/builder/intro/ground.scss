@@ -1,8 +1,9 @@
 .ground {
     position: absolute;
-    width: 2000px;
+    width: 4000px;
     height: 2000px;
     z-index: 11;
 
     top: var(--ground-y);
+    left: var(--ground-x);
 }

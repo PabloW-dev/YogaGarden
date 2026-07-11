@@ -8,7 +8,8 @@ export default function Seed(props) {
       className="seed"
       viewBox="0 0 70 70"
       style={{
-        "--seed-offsetY": `${seed.offsetY}%`
+        "--seed-offsetY": `${seed.offsetY}%`,
+        "--seed-offsetX": `${seed.offsetX}%`
       }}
     >
         <ellipse 
@@ -16,7 +17,7 @@ export default function Seed(props) {
             cy="50"
             rx="15"
             ry="25"
-            fill="#1A120F"
+            fill="#000000"
         />
     </svg>
   );

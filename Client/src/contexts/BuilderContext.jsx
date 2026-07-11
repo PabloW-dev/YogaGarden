@@ -8,7 +8,7 @@ export function BuilderProvider({ children }) {
     const [seedData, setSeedData] = useState({
         name: "",
         objective: "",
-        duration: 60,
+        duration: 15,
         level: "beginner"
     });
 
