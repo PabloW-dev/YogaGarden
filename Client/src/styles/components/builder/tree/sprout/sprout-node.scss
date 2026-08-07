@@ -1,0 +1,21 @@
+.sprout-node {
+    position: absolute;
+    z-index: 17;
+    user-select: none;
+    pointer-events: none;
+
+    width: 0.5%;
+
+    left: calc(var(--sproutNode-x) + var(--sproutNode-x2, 0%));
+    top: calc(var(--sproutNode-y) + var(--sproutNode-y2, 0%));
+
+    transform: 
+        scaleX(var(--sproutNode-scaleX, 1))
+        rotate(var(--sprout-rotation));
+
+    transform-origin: center;
+
+    transition:
+        opacity .5s ease,
+        transform .4s ease;
+}

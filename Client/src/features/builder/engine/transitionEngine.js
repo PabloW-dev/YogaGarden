@@ -1,5 +1,6 @@
 //for B2 type animations
 import { createTimeline } from "./timelineEngine";
+import { playOutbreak, playBranch } from "./treeEngine";
 
 const timeline = createTimeline();
 
@@ -37,10 +38,17 @@ async function playSeedTransition(actions, direction) {
         case "next":
 
             actions.updateScene("camera", {
-                x: 650
+                x: 600,
+                duration: "2s"
             })
 
-            await timeline.wait(1500);
+            await timeline.wait(2000);
+
+            playOutbreak(actions, "next");
+
+            await timeline.wait(2500);
+
+            actions.setSproutNodesVisible(true);
 
             break;
 
@@ -57,17 +65,54 @@ async function playOutbreakTransition(actions, direction) {
 
         case "next":
 
+            actions.setSproutNodesVisible(false);
+
+            await timeline.wait(500);
+
+            actions.updateScene("camera", {
+                x: 0,
+                y: 300,
+                zoom: 0.5,
+                duration: "2s"
+            })
+
+            await timeline.wait(2000);
+
+            playBranch(actions, "next");
+
+            await timeline.wait(2500);
+
+            actions.setSproutNodesVisible(true);
+
+            actions.updateScene("camera", {
+                zoom: 1.4,
+                y: 420,
+                x: -575,
+                duration: "2s"
+            });
+
+            actions.updateScene("background", {
+                visible: 1
+            });
+
             break;
 
         case "prev":
 
+            actions.setSproutNodesVisible(false);
+
+            await timeline.wait(500);
+
+            playOutbreak(actions, "prev");
+
+            await timeline.wait(2500);
+
             actions.updateScene("camera", {
-                x: 0
+                x: 0,
+                duration: "2s"
             });
 
-            
-
-            await timeline.wait(1500);
+            await timeline.wait(2000);
 
             break;
     }   
@@ -80,9 +125,43 @@ async function playBranchTransition(actions, direction) {
 
         case "next":
 
+            await timeline.wait(2000);
+
             break;
 
         case "prev":
+
+            actions.updateScene("camera", {
+                zoom: 0.5,
+                y: 300,
+                x: 0,
+                duration: "2s"
+            });
+
+            actions.updateScene("background", {
+                visible: 0
+            });
+
+            await timeline.wait(2000);
+
+            actions.setSproutNodesVisible(false);
+
+            await timeline.wait(500);
+
+            playBranch(actions, "prev");
+
+            await timeline.wait(2500);
+
+            actions.updateScene("camera", {
+                x: 600,
+                y: -100,
+                zoom: 1.3,
+                duration: "2s"
+            })
+
+            await timeline.wait(2000);
+
+            actions.setSproutNodesVisible(true);
 
             break;
     }   
@@ -98,6 +177,8 @@ async function playTreeTransition(actions, direction) {
             break;
 
         case "prev":
+
+            await timeline.wait(2000);
 
             break;
     }   

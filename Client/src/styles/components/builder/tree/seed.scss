@@ -1,6 +1,8 @@
 .seed {
     position: absolute;
     z-index: 14;
+    user-select: none;
+    pointer-events: none;
 
     width: clamp(20px, 3vw, 80px);
     height: clamp(30px, 4.5vw, 120px);
@@ -12,4 +14,5 @@
     transition: 
         top 1.5s ease,
         left 1.5s ease;
+        opacity: 0.5s ease;
 }

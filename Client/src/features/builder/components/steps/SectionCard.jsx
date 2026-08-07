@@ -1,4 +1,5 @@
 import { useBuilder } from "../../../../contexts/useBuilder";
+import TrashIcon from "../../../../assets/ui/trash.png";
 
 export default function SectionCard(props) {
     const { 
@@ -12,7 +13,7 @@ export default function SectionCard(props) {
         setDragOverIndex 
     } = props;
 
-    const { setOutbreakData, seedData } = useBuilder();
+    const { setOutbreakData } = useBuilder();
 
     function handleDurationChange(e) {
         const allowedMax = section.duration + remainingTime;
@@ -80,6 +81,7 @@ export default function SectionCard(props) {
         )}
 
         <div
+            className="section-card"
             onDragEnter={handleDragEnter}
             style={{
                 display: "flex",
@@ -91,6 +93,7 @@ export default function SectionCard(props) {
             }}
         >
             <span
+                className="section-card__span"
                 draggable
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
@@ -103,24 +106,55 @@ export default function SectionCard(props) {
                 ☰
             </span>
 
-            <div>
-                <p>{section.type}</p>
+            <div className="section-card__content">
+                <div className="section-card__content--text">
+                    <p>{section.icon} {section.type}</p>
+                    <p>Duration: <span>{section.duration}</span> min</p>
+                </div>
 
-                <p>Duration: {section.duration} min</p>
+                <div className="section-card__content--interaction">
+                    <div className="section-card__content--slider">
+                        <input 
+                            className="section-card__content--input"
+                            type="range"
+                            placeholder="duration"
+                            min={5}
+                            max={20}
+                            value={section.duration}
+                            step={5}
+                            onChange={handleDurationChange}
+                        />
 
-                <input 
-                    type="range"
-                    placeholder="duration"
-                    min={0}
-                    max={seedData.duration}
-                    value={section.duration}
-                    step={5}
-                    onChange={handleDurationChange}
-                />
+                        <svg
+                            className="section-card__content--svg"
+                            viewBox="0 0 300 40"
+                        >
+                            <line
+                                x1="10"
+                                y1="10"
+                                x2="290"
+                                y2="10"
+                                className="track"
+                            />
 
-                <button onClick={deleteSection}>
-                    Delete Section
-                </button>
+                            <circle
+                                className="thumb"
+                                cx={10 + ((section.duration - 5) / (20 - 5)) * 280}
+                                cy="39"
+                                r="6"
+                            />
+                        </svg>
+                    </div>
+
+                    <button 
+                        className="section-card__content--button" 
+                        onClick={deleteSection}
+                    >
+                        <img className="section-card__content--img" 
+                            src={TrashIcon} alt="Delete Section" 
+                        />
+                    </button>
+                </div>
             </div>
         </div>
     </>

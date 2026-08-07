@@ -1,6 +1,8 @@
 .hand-plant {
     position: absolute;
     z-index: 13;
+    user-select: none;
+    pointer-events: none;
 
     width: clamp(200px, 55vw, 4000px);
     height: clamp(100px, 28vw, 2000px);

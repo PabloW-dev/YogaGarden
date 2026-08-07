@@ -1,8 +1,10 @@
 .ground {
     position: absolute;
-    width: 4000px;
+    width: 6000px;
     height: 2000px;
     z-index: 11;
+    user-select: none;
+    pointer-events: none;
 
     top: var(--ground-y);
     left: var(--ground-x);

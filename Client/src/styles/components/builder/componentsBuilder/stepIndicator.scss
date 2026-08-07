@@ -1,13 +1,13 @@
 .step-indicator {
     position: absolute;
     
-    top: 15%;
+    top: 13%;
     left: 42.5%;
     display: flex;
     align-items: center;
     gap: 1rem;
 
-    z-index: 20;
+    z-index: 25;
 
     font-size: clamp(1rem, 1.4vw, 1.8rem);
     font-weight: 300;

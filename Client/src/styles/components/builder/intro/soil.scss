@@ -1,6 +1,8 @@
 .soil {
     position: absolute;
     z-index: 12;
+    user-select: none;
+    pointer-events: none;
 
     width: clamp(80px, 12vw, 4000px);
     height: clamp(40px, 6vw, 2000px);

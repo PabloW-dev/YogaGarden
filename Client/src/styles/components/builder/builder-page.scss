@@ -17,6 +17,14 @@
 
 @use "./tree/seed.scss";
 @use "./tree/root.scss";
+@use "./tree//sprout/sprout-node.scss";
+@use "./tree/sprout/sprout-frame1.scss";
+@use "./tree/sprout/sprout-frame2.scss";
+@use "./tree/sprout/sprout-frame3.scss";
+@use "./tree/sprout/sprout-frame4.scss";
+@use "./tree/sprout/sprout-frame5.scss";
+@use "./tree//sprout//sprout-frames.scss";
+@use "./tree/branch.scss";
 
 .builder-page {
     position: relative;
@@ -24,6 +32,18 @@
     height: 100vh;
     overflow: hidden;
 
+    --Ocamera-x: 0px;
+    --Ocamera-y: 0px;
+
     --seed-step-w: 40%;
     --seed-step-h: 40%;
+
+    --outbreak-step-w: 100%;
+    --outbreak-step-h: 50%;
+
+    --branch-step__section-x: 0%;
+    --branch-step__section-y: 0%;
+
+    --branch__button-x: 0%;
+    --branch__button-y: 0%;
 }

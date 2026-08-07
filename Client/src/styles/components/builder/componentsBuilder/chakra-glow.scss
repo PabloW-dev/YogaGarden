@@ -5,3 +5,23 @@
 
     transition: background-color 1.5s ease;
 }
+
+.background-helper {
+    position: absolute;
+    inset: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    transition: 
+        opacity 1.5s ease,
+        background-color 1.5s ease;
+
+    &__section {
+        grid-column: 2;
+
+        transition: 
+            opacity 1.5s ease,
+            background-color 1.5s ease;
+    }
+}

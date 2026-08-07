@@ -3,7 +3,8 @@
 export default function StepIndicator({ 
   currentStep, 
   introFinished,
-  transition
+  transition,
+  activeSectionId
 }) {
 
   const steps = [1, 2, 3, 4];
@@ -11,7 +12,7 @@ export default function StepIndicator({
   return (
     <div className="step-indicator"
       style={{
-        opacity: introFinished && !transition
+        opacity: introFinished && !transition && activeSectionId === null
           ? "1"
           : "0"
       }}

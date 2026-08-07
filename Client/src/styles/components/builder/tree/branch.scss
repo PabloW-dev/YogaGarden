@@ -1,0 +1,72 @@
+.branch {
+    position: absolute;
+    inset: 0;
+    user-select: none;
+    pointer-events: none;
+    z-index: 18;
+
+    transition: opacity 1.5s ease;
+
+    &__family {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+
+        &--father {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            z-index: 19;
+
+            top: calc(var(--branch__button-y) + var(--button-y2, 0%));
+            left: calc(var(--branch__button-x) + var(--button-x2, 0%));
+
+            border: none;
+            background: none;
+            font-size: .9rem;
+            font-weight: 300;
+            letter-spacing: .25rem;
+            text-transform: uppercase;
+            color: #9a7a2d;
+            opacity: .9;
+        }
+
+        &--childs {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            user-select: none;
+            z-index: 19;
+
+            &-b {
+                position: absolute;
+                pointer-events: none;
+
+                left: var(--child-x, 0px);
+                top: var(--child-y, 0px);
+
+                transform: translate(-50%, -50%);
+
+                max-width: 15px;
+                max-height: 15px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                border: none;
+                background: none;
+            }
+        }
+    }
+
+    &__lines {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        user-select: none;
+    }
+}

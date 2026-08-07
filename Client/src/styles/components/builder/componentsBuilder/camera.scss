@@ -5,11 +5,11 @@
     transform-origin: center center;
 
     transform: 
+        scale(var(--camera-zoom, 1))
         translate(
-            calc(var(--Ocamera-x) + var(--camera-x, 0px)), 
+            calc(var(--Ocamera-x) + var(--camera-x, 0px)),
             calc(var(--Ocamera-y) + var(--camera-y, 0px))
-        )
-        scale(var(--camera-zoom, 1));
+        );
 
-    transition: transform 1.5s ease;
+    transition: transform var(--camera-duration, 1.5s) ease;
 }

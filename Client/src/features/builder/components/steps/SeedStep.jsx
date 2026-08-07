@@ -1,3 +1,6 @@
+//TO-DO: añadir fecha -> frontCanvas cambia según la estación
+//TO-DO: ajustar el array de técnicas disponibles según el nivel
+
 import { useBuilder } from "../../../../contexts/useBuilder";
 
 export default function SeedStep({ introFinished, transition }) {
@@ -66,8 +69,8 @@ export default function SeedStep({ introFinished, transition }) {
                 
 
                 {usedTime > seedData.duration && (
-                    <p>
-                        Sections use {usedTime} min but class duration is only {seedData.duration} min.
+                    <p className="warning">
+                        ⚠ Sections use <span>{usedTime}</span> min but class duration is only <span>{seedData.duration}</span> min.
                     </p>
                 )}
             </label>

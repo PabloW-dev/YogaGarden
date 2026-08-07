@@ -1,6 +1,8 @@
 .hand-cover {
     position: absolute;
     z-index: 13;
+    user-select: none;
+    pointer-events: none;
 
     width: clamp(200px, 60vw, 4000px);
     height: clamp(100px, 20vw, 2000px);

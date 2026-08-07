@@ -5,11 +5,13 @@ import { createTimeline } from "../../engine/timelineEngine";
 
 
 export default function Navigation({ 
+  setSproutNodesVisible,
   updateScene, 
   introFinished,
   onTransition,
   transition,
-  setTransition 
+  setTransition,
+  activeSectionId
 }) {
     const { step, setStep } = useBuilder();
 
@@ -17,6 +19,7 @@ export default function Navigation({
 
     const [isTransitioning, setIsTransitioning] = useState(false);
 
+    const disabled = transition || activeSectionId !== null;
 
     async function nextStep() {
       if (isTransitioning) return;
@@ -24,6 +27,7 @@ export default function Navigation({
       setIsTransitioning(true);
 
       await playStepTransition({ 
+        setSproutNodesVisible,
         updateScene,
         onTransition
       }, step, "next");
@@ -44,6 +48,7 @@ export default function Navigation({
       setIsTransitioning(true);
 
       await playStepTransition({ 
+        setSproutNodesVisible,
         updateScene,
         onTransition
       }, step, "prev");
@@ -62,21 +67,24 @@ export default function Navigation({
   return (
     <div className="navigation"
       style={{
-        opacity: introFinished && !transition
+        opacity: introFinished && !transition && activeSectionId === null
           ? "1"
-          : "0"
+          : "0",
+        pointerEvents: introFinished && !transition && activeSectionId === null
+          ? "auto"
+          : "none"
       }}
     >
       
       <button
-        disabled={step === 1}
+        disabled={disabled || step === 1}
         onClick={() => prevStep()}
       >
         ‹
       </button>
 
       <button
-        disabled={step === 4}
+        disabled={disabled || step === 4}
         onClick={() => nextStep()}
       >
         ›

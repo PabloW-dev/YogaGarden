@@ -39,7 +39,8 @@ export async function playIntro(actions) {
 
     actions.updateScene("camera", {
         y: -100,
-        zoom: 1.3
+        zoom: 1.3,
+        duration: "1.5s"
     })
 
     actions.updateScene("handCoverx", {

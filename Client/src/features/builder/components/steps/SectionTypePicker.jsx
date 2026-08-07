@@ -7,64 +7,67 @@ export default function SectionTypePicker(props) {
 
       const { setOutbreakData } = useBuilder();
 
-      function addSection(type) {
+      function addSection(icon, type) {
         setOutbreakData(prev => ({
             ...prev,
             sections: [
                 ...prev.sections,
                 {
                     id: crypto.randomUUID(),
+                    icon,
                     type,
-                    duration: 0
+                    duration: 5
                 }
             ]
         }));
 
         closePicker();
+
+        
       }
 
   return (
-    <div>
+    <div className="section-type">
       <button
-        onClick={() => addSection("focusing")}
+        onClick={() => addSection("◎", "focusing")}
       >
-        Focusing
+        ◎ Focusing
       </button>
 
       <button
-        onClick={() => addSection("pranayama")}
+        onClick={() => addSection("∿", "pranayama")}
       >
-        Pranayama
+        ∿ Pranayama
       </button>
 
       <button
-        onClick={() => addSection("stretching")}
+        onClick={() => addSection("↔", "stretching")}
       >
-        Stretching
+        ↔ Stretching
       </button>
 
       <button
-        onClick={() => addSection("heating")}
+        onClick={() => addSection("☼", "heating")}
       >
-        Heating
+        ☼ Heating
       </button>
 
       <button
-        onClick={() => addSection("asanas")}
+        onClick={() => addSection("✦", "asanas")}
       >
-        Asanas Secuence
+        ✦ Asanas Secuence
       </button>
 
       <button
-        onClick={() => addSection("meditation")}
+        onClick={() => addSection("◌", "meditation")}
       >
-        Meditation
+        ◌ Meditation
       </button>
 
       <button
-        onClick={() => addSection("relaxation")}
+        onClick={() => addSection("❈", "relaxation")}
       >
-        Relaxation
+        ❈ Relaxation
       </button>
     </div>
   )

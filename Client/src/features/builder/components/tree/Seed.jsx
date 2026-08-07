@@ -9,7 +9,8 @@ export default function Seed(props) {
       viewBox="0 0 70 70"
       style={{
         "--seed-offsetY": `${seed.offsetY}%`,
-        "--seed-offsetX": `${seed.offsetX}%`
+        "--seed-offsetX": `${seed.offsetX}%`,
+        opacity: seed.visible ? 1 : 0
       }}
     >
         <ellipse 

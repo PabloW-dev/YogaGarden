@@ -7,15 +7,18 @@ import meditations from "./meditations";
 import relaxations from "./relaxations";
 
 const suggestionMap = {
-    asanas,
-    pranayamas,
-    stretchings,
+    asanas: asanas,
+    pranayama: pranayamas,
+    stretching: stretchings,
     focusing: focusings,
-    heatings,
-    meditations,
-    relaxations
+    heating: heatings,
+    meditation: meditations,
+    relaxation: relaxations
 }
 
 export function getSuggestions(type) {
-    return suggestionMap[type] ?? [];
+    return (suggestionMap[type] ?? []).map(item => ({
+        ...item,
+        type
+    }));
 }

@@ -28,6 +28,12 @@ export default function OutbreakStep({ transition }) {
       0
     ) ?? 0;
 
+
+  const MAX_SECTIONS = 12;
+  const amountSections = outbreakData.sections?.length;
+
+
+
   function moveSection(fromIndex, toIndex) {
     setOutbreakData(prev => {
       const updated = [...prev.sections];
@@ -52,44 +58,38 @@ export default function OutbreakStep({ transition }) {
                 : "0"
         }}
     >
-      <div>
-        <p>{`Class Duration: ${totalTime}`}</p>
-        <p>{`Remaining: ${remainingTime}`}</p>
+      <div className="outbreak-step__left">
+        <div>
+          <p className="outbreak-step__left--duration">Class Duration: <span>{totalTime}</span></p>
+          <p className="outbreak-step__left--remaining">Remaining: <span>{remainingTime}</span></p>
+        </div>
+
+        <button className="outbreak-step__left--button"
+          disabled={remainingTime < 5 || amountSections >= MAX_SECTIONS}
+          onClick={() => setShowPicker(v => !v)}
+        >
+          + New Section
+        </button>
+
+        {
+          showPicker && (<SectionTypePicker 
+            closePicker={() => 
+            setShowPicker(false)} 
+          />
+        )}
       </div>
 
-      <button onClick={() => setShowPicker(v => !v)}>
-        New Section
-      </button>
-
-      {
-        showPicker && (<SectionTypePicker closePicker={() => setShowPicker(false)} />
-      )}
-
-      <div>
+      <div className="outbreak-step__center">
         {outbreakData.sections?.map((section, index) => {
 
           const used = usedDuration(section.id);
           const limit = section.duration;
-          const isOver = used > limit;
 
-          const remainingTime = seedData.duration - usedTime;
-          const isUnderAllocated = remainingTime > 0;
+          const isOver = used > limit;
 
           return (
             <div key={section.id}>
-
-              {isOver && (
-                <p>
-                  Secuence uses {used} min but section duration is only {limit} min
-                </p>
-              )}
-
-              {isUnderAllocated && (
-                <p>
-                  There are {remainingTime} min still unallocated
-                </p>
-              )}
-
+            
               <SectionCard 
                 section={section} 
                 index={index} 
@@ -100,10 +100,24 @@ export default function OutbreakStep({ transition }) {
                 dragOverIndex={dragOverIndex}
                 setDragOverIndex={setDragOverIndex}
               />
+
+              {isOver && (
+                <p className="warning">
+                  ⚠ Secuence uses <span>{used}</span> min but section duration is only <span>{limit}</span> min
+                </p>
+              )}
             </div>
           );
         })}
+
+        {remainingTime > 0 && (
+          <p className="warning">
+            ⚠ There are <span>{remainingTime}</span> min still unallocated
+          </p>
+        )}
       </div>
+
+      <div className="outbreak-step__right"></div>
     </div>
   )
 }
