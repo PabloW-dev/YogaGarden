@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { BuilderContext} from "./useBuilder";
 
 
@@ -7,6 +7,7 @@ export function BuilderProvider({ children }) {
 
     const [seedData, setSeedData] = useState({
         name: "",
+        date: "",
         objective: "",
         duration: 15,
         level: "beginner"
@@ -20,6 +21,26 @@ export function BuilderProvider({ children }) {
         sections: {},
     });
 
+    const resetBuilder = useCallback(() => {
+        setStep(1);
+
+        setSeedData({
+            name: "",
+            date: "",
+            objective: "",
+            duration: 15,
+            level: "beginner"
+        });
+
+        setOutbreakData({
+            sections: []
+        });
+
+        setBranchData({
+            sections: {}
+        });
+    }, [])
+
     return (
         <BuilderContext.Provider value={{
             step,
@@ -29,7 +50,8 @@ export function BuilderProvider({ children }) {
             outbreakData,
             setOutbreakData,
             branchData,
-            setBranchData
+            setBranchData,
+            resetBuilder
         }}>
             {children}
         </BuilderContext.Provider>

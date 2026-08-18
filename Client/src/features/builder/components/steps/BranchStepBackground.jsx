@@ -10,15 +10,15 @@ export default function BranchStepBackground({ background }) {
       <div />
       <div className="background-helper__section"
         style={{
-        backgroundColor: step === 3
-          ? "white"
-          : "white",
-        zIndex: step === 3
-          ? "20"
-          : "0",
-        opacity: visible
-          ? "0.85"
-          : "0"
+          backgroundColor: step === 3
+            ? "white"
+            : "white",
+          zIndex: step === 3
+            ? "20"
+            : "0",
+          opacity: visible && step === 3
+            ? "0.8"
+            : "0"
       }}
       />
     </div>

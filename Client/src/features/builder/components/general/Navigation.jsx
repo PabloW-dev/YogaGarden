@@ -69,25 +69,38 @@ export default function Navigation({
       style={{
         opacity: introFinished && !transition && activeSectionId === null
           ? "1"
-          : "0",
-        pointerEvents: introFinished && !transition && activeSectionId === null
-          ? "auto"
-          : "none"
+          : "0"
       }}
     >
       
       <button
         disabled={disabled || step === 1}
         onClick={() => prevStep()}
+        style={{
+          opacity: step === 1
+            ? 0
+            : 1,
+          pointerEvents: introFinished && !transition && activeSectionId === null
+          ? "auto"
+          : "none"
+        }}
       >
-        ‹
+        ‹‹
       </button>
 
       <button
         disabled={disabled || step === 4}
         onClick={() => nextStep()}
+        style={{
+          opacity: step === 4
+            ? 0
+            : 1,
+          pointerEvents: introFinished && !transition && activeSectionId === null && step !== 4
+          ? "auto"
+          : "none"
+        }}
       >
-        ›
+        ››
       </button>
     </div>
   );

@@ -68,7 +68,7 @@ export default function OutbreakStep({ transition }) {
           disabled={remainingTime < 5 || amountSections >= MAX_SECTIONS}
           onClick={() => setShowPicker(v => !v)}
         >
-          + New Section
+          <span>+</span> New Section
         </button>
 
         {

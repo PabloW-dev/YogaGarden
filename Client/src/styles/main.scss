@@ -4,6 +4,11 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap");
 
+@font-face {
+    font-family: "Yogafont";
+    src: url("/fonts/yogafont.ttf") format("truetype");
+}
+
 body {
     margin: 0;
 }
@@ -17,4 +22,8 @@ body {
 .warning span {
     font-size: 18px;
     font-weight: 600 !important;
+}
+
+.technique-icon {
+    font-family: "Yogafont";
 }

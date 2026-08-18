@@ -25,3 +25,19 @@
 .root-segment.visible {
     opacity: 1;
 }
+
+.adult-roots {
+    z-index: 19;
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+
+    top: 80%;
+    left: -40%;
+
+    transform: scale(7);
+
+    &__img {
+        position: absolute;
+    }
+}

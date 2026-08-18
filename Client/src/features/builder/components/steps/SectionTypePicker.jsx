@@ -1,5 +1,6 @@
-import { useBuilder } from "../../../../contexts/useBuilder";
+//añadir type reflexion
 
+import { useBuilder } from "../../../../contexts/useBuilder";
 
 
 export default function SectionTypePicker(props) {

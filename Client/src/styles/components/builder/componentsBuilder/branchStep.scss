@@ -1,3 +1,12 @@
+//TO-DO:  
+//tampoco los de seleccionar una postura recomendada,
+//el modal hay que encontrar una forma de que tenga buen 
+//flujo,
+//el searching hay que encontrar una forma de que devuelva
+// la lista entera y que quepa, y luego filtre de esa 
+//lista según lo que se escriba
+//hacer que cuando aparezca el overflow se baje automático
+
 .branch-step__section--chain button {
     animation: chainAppear 1s ease forwards;
 }
@@ -94,7 +103,8 @@
                 cursor: default;
             }
 
-            border: none;
+            border: 1px solid rgba(154,122,45,.35);
+            border-radius: 1px;
             background: none;
             font-weight: 300;
             letter-spacing: .25rem;
@@ -145,12 +155,13 @@
                 
                 width: 30px;
                 height: 30px;
-                font-size: 2.5rem;
+                font-size: 5rem;
                 margin-bottom: 1rem;
 
                 border: none;
                 background: none;
 
+                color: rgba(0,0,0,.8);
             }
         }
 
@@ -195,6 +206,16 @@
                     cursor: pointer;
                     transform: translateY(-3px);
                     opacity: 1;
+                }
+            }
+
+            &-TI {
+                padding: 2rem 0;
+                margin-left: 2.5rem;
+                
+                span {
+                    font-size: 1.3rem;
+                    opacity: .95;
                 }
             }
 
@@ -391,6 +412,15 @@
                     .placeholder {
                         font-size: 2rem;
                         opacity: 1;
+                    }
+
+                    .technique-icon {
+                        font-size: 4rem;
+                        opacity: 1;
+                    }
+
+                    .unicode-icon {
+                        font-size: 2rem;
                     }
 
                     &:hover {

@@ -1,3 +1,5 @@
+//TO-DO: implementar idiomas
+
 import asanas from "./asanas";
 import pranayamas from "./pranayamas";
 import stretchings from "./stretchings";

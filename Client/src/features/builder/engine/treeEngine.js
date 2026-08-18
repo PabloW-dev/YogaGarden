@@ -98,28 +98,28 @@ export async function playBranch(actions, direction) {
             actions.updateScene("sprout", {
                 frame5: { visible: 0 },
                 frame6: { visible: 1 }
-            })
+            });
 
             await timeline.wait(500);
 
             actions.updateScene("sprout", {
                 frame6: { visible: 0 },
                 frame7: { visible: 1 }
-            })
+            });
 
             await timeline.wait(500);
 
             actions.updateScene("sprout", {
                 frame7: { visible: 0 },
                 frame8: { visible: 1 }
-            })
+            });
 
             await timeline.wait(500);
 
             actions.updateScene("sprout", {
                 frame8: { visible: 0 },
                 frame9: { visible: 1 }
-            })
+            });
 
             await timeline.wait(500);
 
@@ -127,11 +127,7 @@ export async function playBranch(actions, direction) {
                 frame9: { visible: 0 },
                 frame10: { visible: 1 },
                 progress: 1
-            })
-
-            actions.updateScene("roots", {
-                visible: 1
-            })
+            });
 
             break;
         
@@ -140,32 +136,28 @@ export async function playBranch(actions, direction) {
             actions.updateScene("sprout", {
                 frame10: { visible: 0},
                 frame9: { visible: 1 }
-            })
-
-            actions.updateScene("roots", {
-                visible: 0
-            })
+            });
 
             await timeline.wait(500);
 
             actions.updateScene("sprout", {
                 frame9: { visible: 0},
                 frame8: { visible: 1 }
-            })
+            });
 
             await timeline.wait(500);
 
             actions.updateScene("sprout", {
                 frame8: { visible: 0},
                 frame7: { visible: 1 }
-            })
+            });
 
             await timeline.wait(500);
 
             actions.updateScene("sprout", {
                 frame7: { visible: 0},
                 frame6: { visible: 1 }
-            })
+            });
 
             await timeline.wait(500);
 
@@ -173,7 +165,7 @@ export async function playBranch(actions, direction) {
                 frame6: { visible: 0},
                 frame5: { visible: 1 },
                 progress: 0
-            })
+            });
 
             break;
     }
@@ -206,7 +198,7 @@ export async function playBranchGrow({
             connections: [...visibleConnections]
         });
 
-        await timeline.wait(300);
+        await timeline.wait(180);
     }
 }
 
@@ -218,29 +210,18 @@ export async function playBranchShrink({
 
     const timeline = createTimeline();
 
-    let connections = scene.branch.connections;
+    const connections = scene.branch.connections;
 
     const keep = connections.filter(
         c => c.sectionId !== id
     );
 
-    const remove = connections.filter(
-        c => c.sectionId === id
-    );
+    updateScene("branch", {
+        connections: keep,
+    });
 
-    while (remove.length) {
-
-        remove.pop();
-
-        updateScene("branch", {
-            connections: [
-                ...keep,
-                ...remove
-            ]
-        });
-
-        await timeline.wait(180);
-    }
+    await timeline.wait(180);
+    
 }
 
 export function getConnections(sectionId, chain, father, sprout) {
@@ -274,4 +255,105 @@ export function getConnections(sectionId, chain, father, sprout) {
     }
 
     return connections;
+}
+
+export async function playTree(actions, direction) {
+    const timeline = createTimeline();
+
+    switch(direction) {
+
+        case "next":
+
+            actions.updateScene("sprout", {
+                frame10: { visible: 0 },
+                frame11: { visible: 1 }
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame11: { visible: 0 },
+                frame12: { visible: 1 }
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame12: { visible: 0 },
+                frame13: { visible: 1 }
+            });
+
+            actions.updateScene("roots", {
+                visible: 1
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame13: { visible: 0 },
+                frame14: { visible: 1 }
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame14: { visible: 0 },
+                frame15: { visible: 1 }
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("branch", {
+                progress: 1
+            });
+
+            break;
+
+        case "prev":
+
+            actions.updateScene("branch", {
+                progress: 0
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame15: { visible: 0},
+                frame14: { visible: 1 }
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame14: { visible: 0},
+                frame13: { visible: 1 }
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame13: { visible: 0},
+                frame12: { visible: 1 }
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame12: { visible: 0},
+                frame11: { visible: 1 }
+            });
+
+            actions.updateScene("roots", {
+                visible: 0
+            });
+
+            await timeline.wait(500);
+
+            actions.updateScene("sprout", {
+                frame11: { visible: 0},
+                frame10: { visible: 1 }
+            });
+
+            break;
+    }
 }

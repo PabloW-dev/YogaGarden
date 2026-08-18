@@ -38,7 +38,30 @@ export function scheduleCloseModal(setModal,delay = 1000) {
     }, delay);
 }
 
-export function cancelCloseModal() {
+export function cancelCloseModal({ modal, item } = {}) {
+    
+    //case 1 -> entrando al modal
+    if(!item) {
+        clearTimeout(closeTimeout);
+        closeTimeout = null;
+        return;
+    }
+    
+    //case 2 -> hay un modal de otro botton abierto
+    if (modal?.open) {
+
+        if (
+            modal.type === "item" &&
+            modal.payload?.number === item.number
+        ) {
+            clearTimeout(closeTimeout);
+            closeTimeout = null;
+        }
+
+        return;
+    }
+
+    //case 3 -> no hay modal abierto
     clearTimeout(closeTimeout);
     closeTimeout = null;
 }
@@ -56,6 +79,7 @@ export function closeModal(setModal) {
 
 
 export function openModal(setModal, modal) {
+
   setModal({
     confirm: null,
     payload: null,

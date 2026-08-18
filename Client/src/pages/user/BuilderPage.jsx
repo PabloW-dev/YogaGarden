@@ -1,4 +1,4 @@
-//import useEffect para las animaciones + camara + SVG
+
 import { useCallback, useState } from "react";
 
 import TreeCanvas from "../../features/builder/components/tree/TreeCanvas";
@@ -19,7 +19,7 @@ import BranchStepBackground from "../../features/builder/components/steps/Branch
 
 
 
-export default function BuilderPage({ setModal }) {
+export default function BuilderPage({ modal, setModal }) {
   const [introFinished, setIntroFinished] = useState(false);
   const [transition, setTransition] = useState(false);
   const [sproutNodesVisible, setSproutNodesVisible] = useState(false);
@@ -76,6 +76,21 @@ export default function BuilderPage({ setModal }) {
       frame10: {
         visible: 0
       },
+      frame11: {
+        visible: 0
+      },
+      frame12: {
+        visible: 0
+      },
+      frame13: {
+        visible: 0
+      },
+      frame14: {
+        visible: 0
+      },
+      frame15: {
+        visible: 0
+      },
       progress: 0
     },
 
@@ -100,7 +115,12 @@ export default function BuilderPage({ setModal }) {
 
     branch: {
       connections: [],
-      growRequests: null
+      growRequests: null,
+      progress: 0
+    },
+
+    roots: {
+      visible: 0
     }
 
   });
@@ -160,11 +180,15 @@ export default function BuilderPage({ setModal }) {
       {step === 3 && <BranchStep 
           activeSectionId={activeSectionId}
           setActiveSectionId={setActiveSectionId}
+          
           transition={transition} 
           updateScene={updateScene}
           onTransition={onTransition} 
           setTransition={setTransition} 
+          
           setModal={setModal}
+          modal={modal}
+          
           scene={scene}
         />}
 
@@ -182,7 +206,7 @@ export default function BuilderPage({ setModal }) {
         activeSectionId={activeSectionId}
       />
       
-      <FrontCanvas />
+      <FrontCanvas transition={transition} />
     </div>
   );
 }

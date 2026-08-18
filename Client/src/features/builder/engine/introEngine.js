@@ -4,6 +4,36 @@ export async function playIntro(actions) {
 
     const timeline = createTimeline();
 
+    // seteamos scene
+    actions.updateScene("handPlanty", {
+        visible: 1,
+        offsetY: 0
+    });
+
+    actions.updateScene("handCoverx", {
+        visible: 0,
+        offsetX: 0
+    });
+
+    actions.updateScene("seed", {
+        visible: 1,
+        offsetY: 0,
+        offsetX: 0
+    });
+
+    actions.updateScene("soil", {
+        offsetX: 0
+    });
+
+    actions.updateScene("camera", {
+        x: 0,
+        y: 0,
+        zoom: 1,
+        duration: "1.5s"
+    });
+
+    await timeline.wait(100);
+
     actions.updateScene("handPlanty", {
         offsetY: 25
     });

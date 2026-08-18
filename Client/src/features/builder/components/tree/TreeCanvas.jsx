@@ -10,6 +10,7 @@ import Root from "./roots/Root";
 import Sprout from "./Sprout";
 import SproutNode from "./SproutNode";
 import Branch from "./Branch";
+import AdultsRoots from "./roots/AdultsRoots";
 
 
 export default function TreeCanvas({ 
@@ -198,7 +199,12 @@ export default function TreeCanvas({
 
         <Sprout scene={scene} />
 
-        <Branch scene={scene} transition={transition} updateScene={updateScene} sproutNodes={sproutNodes} />
+        <Branch 
+          scene={scene} 
+          transition={transition} 
+          updateScene={updateScene} 
+          sproutNodes={sproutNodes} 
+        />
 
         <div className="sprout-nodes">
           {sproutNodes.map((node, index) => (
@@ -222,9 +228,10 @@ export default function TreeCanvas({
         <HandCover handCoverx={scene.handCoverx} />
 
         <Soil soil={scene.soil} />
-
           
         <Root />
+
+        <AdultsRoots visible={scene.roots.visible} />
 
     </div>
   );

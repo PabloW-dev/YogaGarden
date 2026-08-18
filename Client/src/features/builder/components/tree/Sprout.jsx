@@ -1,5 +1,10 @@
 import Frame1 from "./outbreak/Frame1";
 import Frame10 from "./outbreak/Frame10";
+import Frame11 from "./outbreak/Frame11";
+import Frame12 from "./outbreak/Frame12";
+import Frame13 from "./outbreak/Frame13";
+import Frame14 from "./outbreak/Frame14";
+import Frame15 from "./outbreak/Frame15";
 import Frame2 from "./outbreak/Frame2";
 import Frame3 from "./outbreak/Frame3";
 import Frame4 from "./outbreak/Frame4";
@@ -26,6 +31,11 @@ export default function Sprout({ scene }) {
       <Frame8 visible={sprout.frame8.visible} />
       <Frame9 visible={sprout.frame9.visible} />
       <Frame10 visible={sprout.frame10.visible} />
+      <Frame11 visible={sprout.frame11.visible} />
+      <Frame12 visible={sprout.frame12.visible} />
+      <Frame13 visible={sprout.frame13.visible} />
+      <Frame14 visible={sprout.frame14.visible} />
+      <Frame15 visible={sprout.frame15.visible} />
     </div>
   )
 }

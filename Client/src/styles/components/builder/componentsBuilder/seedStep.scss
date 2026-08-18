@@ -1,3 +1,5 @@
+//TO-DO: el slice no se entiende
+
 .seed-step {
     position: absolute;
     z-index: 30;
@@ -41,14 +43,68 @@
 
 .seed-step__duration {
     position: absolute;
-    top: 48%;
-    left: -18%;
+    top: 68%;
+    left: -28%;
 }
 
 .seed-step__level {
     position: absolute;
+    top: 68%;
+    right: -20%;
+}
+
+.seed-step__date {
+    position: absolute;
     top: 48%;
-    right: -18%;
+    left: 28%;
+    display: flex;
+    flex-direction: column;
+
+    small {
+        margin-top: .8rem;
+        margin-left: 2rem;
+
+        
+        font-size: .8rem;
+        font-weight: 300;
+        letter-spacing: .08rem;
+        text-transform: uppercase;
+
+        color: rgba(0,0,0,.48);
+    }
+
+    input {
+        margin-top: .2rem;
+        margin-left: 2rem;
+
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,.25);
+
+        background: transparent;
+
+        padding: .4rem 0;
+
+        font-family: "Manrope", sans-serif;
+        font-size: .8rem;
+        font-weight: 300;
+        letter-spacing: .08rem;
+        text-transform: uppercase;
+
+        color: rgba(0,0,0,.88);
+
+        outline: none;
+
+        transition: 
+            border-color .25s ease,
+            opacity .25s ease;
+
+        cursor: pointer;
+
+        &:focus {
+            border-bottom-color: black;
+            color: black;
+        }
+    }
 }
 
 .seed-step label,
@@ -232,4 +288,38 @@
         color .25s ease,
         opacity .25s ease,
         transform .25s ease;
+}
+
+.seed-step input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: .55;
+
+    transition: opacity .25s ease;
+}
+
+.seed-step input[type="date"]:hover::-webkit-calendar-picker-indicator {
+    opacity: 1;
+}
+
+.seed-step input[type="date"]::-webkit-datetime-edit {
+    font-family: "Manrope", sans-serif;
+    font-weight: 300;
+    letter-spacing: .08rem;
+}
+
+.seed-step input[type="date"]::-webkit-datetime-edit-text {
+    color: rgba(0,0,0,.35);
+}
+
+.seed-step input[type="date"]::-webkit-datetime-edit-day-field,
+.seed-step input[type="date"]::-webkit-datetime-edit-month-field,
+.seed-step input[type="date"]::-webkit-datetime-edit-year-field {
+    color: rgba(0,0,0,.88);
+}
+
+.seed-step input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.seed-step input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.seed-step input[type="date"]::-webkit-datetime-edit-year-field:focus {
+    background: transparent;
+    color: black;
 }

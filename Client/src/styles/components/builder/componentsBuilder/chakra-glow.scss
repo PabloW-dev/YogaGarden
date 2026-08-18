@@ -19,6 +19,8 @@
 
     &__section {
         grid-column: 2;
+        position: absolute;
+        inset: 0;
 
         transition: 
             opacity 1.5s ease,

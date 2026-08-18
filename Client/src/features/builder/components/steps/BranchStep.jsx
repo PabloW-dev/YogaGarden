@@ -1,4 +1,4 @@
-//TO-DO: arreglar el modal para que si hay un modal abierto no abra otro hasta que se cierre
+//TO-DO: implementar idioma
 
 import { useBuilder } from "../../../../contexts/useBuilder";
 import { getSuggestions } from "../../../../data/dataManager";
@@ -11,11 +11,15 @@ import { playBranchShrink } from "../../engine/treeEngine";
 export default function BranchStep({
   activeSectionId,
   setActiveSectionId,
+  
   transition, 
   updateScene,
   onTransition,
   setTransition,
+  
   setModal,
+  modal,
+  
   scene
  }) {
   
@@ -541,7 +545,9 @@ export default function BranchStep({
                 <div
                   key={item.instanceId}
                   onMouseEnter={() => {
-                    cancelCloseModal()
+                    cancelCloseModal({ modal, item })
+                    
+                    if (modal.open) return;
 
                     openModal(setModal, {
                       open: true,
@@ -558,9 +564,9 @@ export default function BranchStep({
                     disabled
                   >
                     {item.img ? (
-                      <img src={item.img} alt="PH" />
+                      <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
                     ) : (
-                      <div className="placeholder">⬛</div>
+                      <span className="placeholder">⬛</span>
                     )}
                   </button>
                 </div>
@@ -591,6 +597,12 @@ export default function BranchStep({
                             >
                               ↺
                             </button>
+
+                            <div className="branch-step__section--current-TI">
+                              <span>Time:</span>
+                            </div>
+
+                            
 
                             <div>
                               <button 
@@ -647,7 +659,9 @@ export default function BranchStep({
                           <button
                             key={item.id}
                             onMouseEnter={() => {
-                              cancelCloseModal()
+                              cancelCloseModal({ modal, item })
+                              
+                              if (modal.open) return;
 
                               openModal(setModal, {
                                 open: true,
@@ -671,7 +685,7 @@ export default function BranchStep({
                             }}
                           >
                             {item.img ? (
-                              <img src={item.img} alt="PH" />
+                              <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
                             ) : (
                               <span className="placeholder">⬛</span>
                             )}
@@ -705,7 +719,9 @@ export default function BranchStep({
                           <button
                             key={item.id}
                             onMouseEnter={() => {
-                              cancelCloseModal()
+                              cancelCloseModal({ modal, item })
+                              
+                              if (modal.open) return;
 
                               openModal(setModal, {
                                 open: true,
@@ -729,9 +745,9 @@ export default function BranchStep({
                             }}
                           >
                             {item.img ? (
-                              <img src={item.img} alt="PH" />
+                              <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
                             ) : (
-                              <span className="placeholder">⬛ </span>
+                              <span className="placeholder">⬛</span>
                             )}
                           </button>
                         ))}
@@ -745,8 +761,10 @@ export default function BranchStep({
                         <button
                           key={item.id}
                           onMouseEnter={() => {
-                            cancelCloseModal()
-
+                            cancelCloseModal({ modal, item })
+                            
+                            if (modal.open) return;
+                              
                             openModal(setModal, {
                               open: true,
                               type: "item",
@@ -769,7 +787,7 @@ export default function BranchStep({
                           }}
                           >
                             {item.img ? (
-                              <img src={item.img} alt="PH" />
+                              <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
                             ) : (
                               <span className="placeholder">⬛</span>
                             )}
@@ -802,7 +820,9 @@ export default function BranchStep({
                           <button
                             key={item.id}
                             onMouseEnter={() => {
-                              cancelCloseModal()
+                              cancelCloseModal({ modal, item })
+                              
+                              if (modal.open) return;
 
                               openModal(setModal, {
                                 open: true,
@@ -826,9 +846,9 @@ export default function BranchStep({
                             }}
                           >
                             {item.img ? (
-                              <img src={item.img} alt="PH" />
-                              ) : (
-                              <span className="placeholder">⬛ </span>
+                              <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
+                            ) : (
+                              <span className="placeholder">⬛</span>
                             )}
                           </button>
                         ))}

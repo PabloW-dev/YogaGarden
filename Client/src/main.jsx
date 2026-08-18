@@ -1,3 +1,5 @@
+//TO-DO: CLEAN BUILDERCONTEXT
+
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import { BuilderProvider } from "./contexts/BuilderContext.jsx";

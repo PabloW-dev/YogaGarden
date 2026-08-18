@@ -63,6 +63,27 @@ export default function SeedStep({ introFinished, transition }) {
             />
         </div>
 
+        <div className="seed-step__date">
+            <label>
+                Practice Date:
+            </label>
+
+            <small>
+                which season is this class for?
+            </small>
+
+            <input 
+                type="date"
+                value={seedData.date}
+                onChange={(e) => 
+                    setSeedData(prev => ({
+                        ...prev,
+                        date: e.target.value
+                    }))
+                }
+            />
+        </div>
+
         <div className="seed-step__duration">
             <label>
                 Class Duration: {seedData.duration} min

@@ -1,6 +1,6 @@
 //for B2 type animations
 import { createTimeline } from "./timelineEngine";
-import { playOutbreak, playBranch } from "./treeEngine";
+import { playOutbreak, playBranch, playTree } from "./treeEngine";
 
 const timeline = createTimeline();
 
@@ -125,7 +125,33 @@ async function playBranchTransition(actions, direction) {
 
         case "next":
 
-            await timeline.wait(2000);
+            actions.updateScene("camera", {
+                zoom: 0.5,
+                y: 700,
+                x: 0,
+                duration: "2s"
+            });
+
+            actions.updateScene("background", {
+                visible: 0
+            });
+
+            await timeline.wait(1800);
+
+            actions.setSproutNodesVisible(false);
+
+            await timeline.wait(500);
+
+            playTree(actions, "next");
+
+            actions.updateScene("camera", {
+                zoom: 0.2,
+                y: 1100,
+                x: 0,
+                duration: "5s"
+            });
+
+            await timeline.wait(5000);
 
             break;
 
@@ -178,7 +204,31 @@ async function playTreeTransition(actions, direction) {
 
         case "prev":
 
-            await timeline.wait(2000);
+            playTree(actions, "prev");
+
+            actions.updateScene("camera", {
+                zoom: 0.5,
+                y: 700,
+                x: 0,
+                duration: "5s"
+            });
+
+            await timeline.wait(2500);
+
+            actions.updateScene("camera", {
+                zoom: 1.4,
+                y: 420,
+                x: -575,
+                duration: "2s"
+            });
+
+            await timeline.wait(1800);
+
+            actions.setSproutNodesVisible(true);
+
+            actions.updateScene("background", {
+                visible: 1
+            });
 
             break;
     }   

@@ -1,7 +1,8 @@
 .navigation {
     position: absolute;
     z-index: 30;
-    
+    pointer-events: none;
+    user-select: none;
 
     bottom: 6%;
     right: 0;
@@ -12,6 +13,8 @@
     transition: opacity 1.5s ease;
 
     button {
+        user-select: auto;
+        pointer-events: auto;
         border: none;
         background: none;
         outline: none;
@@ -20,7 +23,8 @@
 
         font-size: clamp(2rem, 4vw, 6rem);
         font-weight: 200;
-        color: rgba(0, 0, 0, 0.75);
+        color: #c4a044;
+        opacity: .7;
         
         cursor: pointer;
 
