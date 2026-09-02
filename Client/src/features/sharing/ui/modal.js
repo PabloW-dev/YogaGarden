@@ -28,46 +28,8 @@ export const modalData = {
     })
 }
 
-let closeTimeout = null;
-
-export function scheduleCloseModal(setModal,delay = 1000) {
-    clearTimeout(closeTimeout);
-
-    closeTimeout = setTimeout(() => {
-        closeModal(setModal);
-    }, delay);
-}
-
-export function cancelCloseModal({ modal, item } = {}) {
-    
-    //case 1 -> entrando al modal
-    if(!item) {
-        clearTimeout(closeTimeout);
-        closeTimeout = null;
-        return;
-    }
-    
-    //case 2 -> hay un modal de otro botton abierto
-    if (modal?.open) {
-
-        if (
-            modal.type === "item" &&
-            modal.payload?.number === item.number
-        ) {
-            clearTimeout(closeTimeout);
-            closeTimeout = null;
-        }
-
-        return;
-    }
-
-    //case 3 -> no hay modal abierto
-    clearTimeout(closeTimeout);
-    closeTimeout = null;
-}
-
-export function closeModal(setModal) {
-    cancelCloseModal();
+export function closeModal(setModal, modal = null) {
+    modal?.payload?.onClose?.();
 
     setModal({
         open: false,

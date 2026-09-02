@@ -1,5 +1,8 @@
+//TO-DO: cerrar el modal con esc y navegación por los elementos con teclado
+//TO-DO: añadir button para cerrar y quitar el onMouseLeave que resulta satán
+
 import { useEffect, useRef } from "react";
-import { modalData, closeModal, scheduleCloseModal, cancelCloseModal } from "./modal";
+import { modalData, closeModal } from "./modal";
 
 
 export default function Modals({
@@ -15,7 +18,7 @@ export default function Modals({
 
     function handlePointerDown(e) {
       if (!modalRef.current?.contains(e.target)) {
-        closeModal(setModal);
+        closeModal(setModal, modal);
       }
     }
 
@@ -24,7 +27,7 @@ export default function Modals({
     return () => {
       document.removeEventListener("pointerdown", handlePointerDown);
     };
-  }, [modal.open, setModal]);
+  }, [modal.open, setModal, modal]);
 
   if (!modal.open) return null;
 
@@ -48,73 +51,81 @@ export default function Modals({
     <div
       ref={modalRef} 
       className="modal"
-      onMouseEnter={cancelCloseModal}
-      onMouseLeave={() => scheduleCloseModal(setModal)}
     >
+      <button
+        type="button"
+        className="modal__close"
+        aria-label="Close"
+        onClick={() => closeModal(setModal, modal)}
+      >
+        ×
+      </button>
 
-      <h2>{content.title}</h2> 
+      <div className="modal__content">
 
-      <div className="modal__info">
-        <p>{content.text}</p>
+        <h2>{content.title}</h2> 
 
-        {content.benefits?.length > 0 && (
-          <> 
-            <h3>Benefits</h3>
-            {content.benefits.map(b => (
-              <p key={b}>{b}</p>
-            ))}
-          </> 
-        )}
+        <div className="modal__content--info">
+          <p>{content.text}</p>
 
-        {content.contraindications?.length > 0 &&(
-          <>
-            <h3>Contraindications</h3>
-            {content.contraindications.map(c => (
-              <p key={c}>{c}</p>
-            ))}
-          </>
-        )}
+          {content.benefits?.length > 0 && (
+            <> 
+              <h3>Benefits</h3>
+              {content.benefits.map(b => (
+                <p key={b}>{b}</p>
+              ))}
+            </> 
+          )}
 
-        {!!content.chakra &&(
-          <>
-            <h3>Primary Chakra</h3>
-            <p>{content.chakra}</p>
-          </>
-        )}
-      </div>
+          {content.contraindications?.length > 0 &&(
+            <>
+              <h3>Contraindications</h3>
+              {content.contraindications.map(c => (
+                <p key={c}>{c}</p>
+              ))}
+            </>
+          )}
 
-      <div className="modal__related">
-        {content.related?.length > 0 && (
-          <h3>Flows Well Into</h3>
-        )}
-        {content.related?.map(name => (
-          <span key={name}>
-            {name}
-          </span>
-        ))}
-      </div>
+          {!!content.chakra &&(
+            <>
+              <h3>Primary Chakra</h3>
+              <p>{content.chakra}</p>
+            </>
+          )}
+        </div>
 
-      {content.buttons?.map(button => (
-        <button
-          key={button.text}
-          onClick={() => {
+        <div className="modal__content--related">
+          {content.related?.length > 0 && (
+            <h3>Flows Well Into</h3>
+          )}
+          {content.related?.map(name => (
+            <span key={name}>
+              {name}
+            </span>
+          ))}
+        </div>
 
-            if (button.action === "close") {
-              closeModal(setModal);
-              return;
-            }
+        {content.buttons?.map(button => (
+          <button
+            key={button.text}
+            onClick={() => {
 
-            if (button.action === "confirm") {
-              modal.confirm?.();
-              closeModal(setModal);
-            }
+              if (button.action === "close") {
+                closeModal(setModal, modal);
+                return;
+              }
+
+              if (button.action === "confirm") {
+                modal.confirm?.();
+                closeModal(setModal, modal);
+              }
             
-          }}
-        >
-          {button.text}
-        </button>
-      ))}    
-      
+            }}
+          >
+            {button.text}
+          </button>
+        ))}    
+      </div>
     </div>
   );
 }

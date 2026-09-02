@@ -1,0 +1,232 @@
+.register {
+    
+    inset: 0;
+    position: relative;
+
+
+    &::before {
+        content: "";
+        position: fixed;
+        
+        top: 0;
+        left: 3%;
+
+        width: 94%;
+        height: 100%;
+
+        background-image: url("../../assets/backgrounds/register.jpg");
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: 100% 100%;
+
+        opacity: .4;
+        z-index: -1;
+        pointer-events: none;
+        user-select: none;
+
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%
+        );
+    }
+
+    &__background {
+        background: rgba(181, 138, 83, 0.75);
+        position: relative;
+
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 5.35rem;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 1rem;
+
+            border: 1px solid black;
+
+            pointer-events: none;
+            user-select: none;
+        }
+    }
+
+    &__header {
+        text-align: center;
+
+        h1 {
+            padding-top: 2rem;
+            margin-bottom: 0;
+            font-size: 3rem;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 500;
+            letter-spacing: .27rem;
+            line-height: 1.05;
+            text-transform: none;
+            color: #332D26;
+        }
+
+        small {
+            margin-right: 10rem;
+            font-size: .8rem;
+            font-weight: 300;
+            letter-spacing: .1rem;
+            color: rgba(0,0,0,.75);
+        }
+    }
+
+    &__form {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            margin: 0;
+            font-size: .8rem;
+            font-weight: 300;
+            letter-spacing: .1rem;
+            color: rgba(0,0,0,.75);
+
+            span {
+                color: #d89c1a;
+                font-weight: 600;
+                font-size: 1.2rem;
+                background: rgba(141, 99, 51, 0.842);
+                padding: .2rem;
+                border-radius: 2px;
+            }
+        }
+
+
+        &--data,
+        &--password,
+        &--checks {
+            display: flex;
+            gap: 4rem;
+            margin-bottom: 1rem;
+            
+            > div {
+                width: 23rem;
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                
+                label {
+                    flex: 0 0 6rem;
+                    font-size: 1rem;
+                    font-weight: 300;
+                    letter-spacing: .1rem;
+                    color: rgba(0,0,0,.75);
+                }
+
+                input {
+                    flex: 1;
+                    min-width: 0;
+                    padding: .5rem;
+                    border-radius: 2px;
+                    border: 1px solid rgba(211, 172, 138, 0.286);
+                    box-shadow: 0 0 12px 6px rgba(212, 171, 110, 0.85);
+                    font-size: 1rem;
+                    letter-spacing: .1rem;
+                    color: rgba(0,0,0,.75);
+                }
+            }
+        }
+        
+        &--checks {
+            margin-bottom: 3rem;
+            width: 50rem;
+            gap: 17.5rem;
+            justify-content: end;
+        }
+
+        button {
+            border: 2px solid rgba(154,122,45,.55);
+            border-radius: 5px;
+            box-shadow: -4px 4px 8px rgba(0,0,0,.62);
+
+            font-family: inherit;
+            font-weight: 600;
+            letter-spacing: .22rem;
+            text-transform: uppercase;
+
+            color: rgba(255,255,255,.75);
+
+            cursor: pointer;
+
+            &:hover:not(:disabled) {
+                background: rgba(236, 214, 105, 0.95);
+                border-color: #9a7a2d;
+                color: black;
+                box-shadow: 0 4px 12px rgba(0,0,0,.12);
+            }
+
+            &:active:not(:disabled) {
+                box-shadow: 0 2px 5px rgba(0,0,0,.1);
+                background: rgb(114, 73, 20);
+            }
+
+            &:disabled {
+                opacity: .35;
+                cursor: default;
+                background: black;
+            }
+        }
+
+        .check-button {
+            background: rgb(190, 174, 27);
+            color: black;
+
+            &--valid {
+                background: #6f9f52;
+            }
+
+            &--invalid {
+                background: #a64b43;
+            }
+        }
+
+        .register-button {
+            margin-top: 3rem;
+            font-size: .9rem;
+            padding: .2rem;
+            background: rgb(100, 122, 39);
+        }
+    }
+
+    &__footer {
+        margin-top: 2rem;
+        text-align: center;
+        padding-bottom: 2rem;
+        margin-bottom: 3rem;
+
+        p {
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: .1rem;
+            color: rgba(0,0,0,.75);
+        }
+
+        span {
+            color: #805f15;
+            font-size: 1.1rem;
+            font-weight: 600;
+            
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.register__form--password {
+    button {
+        background: #86673e;
+        color: black;
+        font-size: 1.1rem;
+    }
+}

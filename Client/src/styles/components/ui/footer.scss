@@ -1,0 +1,182 @@
+.footer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #27221D;
+
+    z-index: 29;
+    pointer-events: none;
+
+    &__builder {
+        position: absolute;
+
+        bottom: 0;
+        left: 0;
+
+        opacity: .65;
+
+        pointer-events: none;
+        user-select: none;
+
+        background: none;
+        
+        &::before,
+        &::after {
+            display: none;
+        }
+        
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+
+        bottom: 10%;
+        right: 12.5%;
+
+        width: 25px;
+        height: 25px;
+
+        background-image: url("../../../assets/backgrounds/footerLadybug.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        opacity: 1;
+
+        pointer-events: none;
+        user-select: none;
+    }
+
+    &-container {
+        display: flex;
+        opacity: 1;
+
+        &__logo {
+            margin-top: .5rem;
+            &--link {
+                display: flex;
+                margin-left: 2rem;
+                margin-right: 5rem;
+                pointer-events: auto;
+                user-select: auto;
+                text-decoration: none;
+
+                img {
+                    min-width: 40px;
+                    width: clamp(40px, 8vw, 70px);
+                    display: block;
+                    aspect-ratio: auto;
+                    object-fit: contain;
+                    height: auto;
+                    
+                }
+
+                span {
+                    margin-top: .6rem;
+
+                    font-size: 2.4rem;
+                    font-family: "Cormorant Garamond", serif;
+                    font-weight: 500;
+                    letter-spacing: .32rem;
+                    line-height: 1.05;
+                    color: #c4a044;
+                    text-decoration: none;
+                }
+            }
+
+            p {
+                color: #c4a044;
+                text-align: center;
+                margin-top: 0;
+                font-size: 1.1rem;
+            }
+        }
+
+
+
+        &__navigation {
+            display: flex;
+            width: 80%;
+            gap: 5rem;
+            margin-top: .5rem;
+            margin-left: 18rem;
+
+            p {
+                font-size: 1.1rem;
+            }
+
+            &--explore {
+                color: #c4a044;
+                
+                &-UL {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                li {
+                    margin-bottom: .4rem;
+                }
+                
+                &-LI {
+                    pointer-events: auto;
+                    user-select: auto;
+                    color: #c4a044;
+                }
+            }
+
+            &--account {
+                color: #c4a044;
+
+                &-UL {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                li {
+                    margin-bottom: .4rem;
+                }
+                
+                &-LI {
+                    pointer-events: auto;
+                    user-select: auto;
+                    color: #c4a044;
+                }
+            }
+
+            &--information {
+                color: #c4a044;
+                display: flex;
+                flex-direction: column;
+
+                &-UL {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: .4rem;
+
+                    list-style: none;
+                    padding: 0;
+                    margin-top: 0;
+                }
+
+                &-LI {
+                    pointer-events: auto;
+                    user-select: auto;
+                    color: #c4a044;
+                }
+            }
+        }
+    }
+
+    &-copy {
+        opacity: 1;
+
+        p {
+            margin: 0 1rem .5rem 0;
+            text-align: end;
+            font-size: 1rem;
+            color: #c4a044;
+        }
+    }
+}
+

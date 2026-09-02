@@ -1,0 +1,383 @@
+.contact {
+    position: relative;
+
+    
+    &::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+
+        background-image: 
+            url("../../assets/backgrounds/contactFlowers.png");
+        background-position: 0% 60%;
+        background-repeat: no-repeat;
+        background-size: 50% auto;
+        transform: translate(0, -10%);
+
+
+        opacity: .5;
+        pointer-events: none;
+        user-select: none;
+    }
+    
+
+
+    &__header {
+        width: 80%;
+        margin: 0 auto;
+        
+        h1 {
+            font-size: 3rem;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 500;
+            letter-spacing: .27rem;
+            line-height: 1.05;
+            text-transform: none;
+            color: #332D26;
+
+            margin: 1.5rem 0 1.5rem 12rem;
+        }
+
+        p {
+                max-width: 750px;
+                margin: .8rem 11rem;
+
+                font-family: inherit;
+                font-size: 1.2rem;
+                line-height: 1.7;
+                opacity: .8;
+            }
+
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: -30%;
+            left: 5%;
+            
+
+            width: 90%;
+            height: 2px;
+
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(79, 90, 69, .65),
+                #9a7a2d,
+                rgba(79, 90, 69, .65),
+                transparent
+            );
+        }
+    }
+
+
+    &__body {
+        margin-top: 5rem;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: 2.5rem;
+            margin-top: 4rem;
+            margin-bottom: 0;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 500;
+            letter-spacing: .27rem;
+            line-height: 1.05;
+            text-transform: none;
+            color: #000000;
+        }
+
+        h3 {
+            margin: 2rem 0 2rem 4rem;
+            font-size: 1.8rem;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 500;
+            letter-spacing: .27rem;
+            line-height: 1.05;
+            text-transform: none;
+            color: #000000;
+        }
+
+        h4 {
+            margin-top: 3rem;
+            margin-left: 4rem;
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 500;
+            letter-spacing: .22rem;
+            line-height: 1.05;
+            text-transform: none;
+            color: #000000;
+        }
+
+        p {
+            margin: .8rem 0;
+
+            font-size: .95rem;
+            line-height: 1.8;
+
+            opacity: .8;
+        }
+
+        span {
+            margin-left: 2rem;
+            font-size: .95rem;
+            line-height: 1.8;
+        }
+
+        small {
+            margin-top: .2rem;
+            margin-right: 10rem;
+            margin-bottom: 2rem;
+        }
+
+        &--questions {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+
+            &-FAQ {
+                width: 50%;
+                
+                div {
+                    max-height: 40vh;
+                    
+                    overflow-y: auto;
+
+                    &::-webkit-scrollbar {
+                        width: 8px;
+                    }
+
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        border-radius: 999px;
+                        background: rgba(154,122,45,.35);
+
+                        &:hover {
+                            background: rgba(154,122,45,.55);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--mail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            div {
+                display: flex;
+                align-items: center;
+            }
+
+            &-FRM {
+                width: 30%;
+                position: relative;
+                padding: 4rem;
+                margin: 3rem;
+                margin-top: 1rem;
+                
+                background: rgba(181, 138, 83, .9);
+
+                &::before {
+                    content: "";
+                    position: absolute;
+
+                    inset: 1.2rem;
+
+                    border: 1px solid black;
+
+                    pointer-events: none;
+                    user-select: none;
+                }
+                
+                > div {
+                    margin: 1rem;
+                    
+                    display: flex;
+                    align-items: center;
+
+                    input {
+                        flex: 1;
+                    }
+                }
+
+                .data {
+                    gap: 3rem;
+
+                    > div {
+                        flex: 1;
+                    }
+                }
+
+                .message {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+
+                    p {
+                        font-family: "Manrope", sans-serif;
+                        font-size: .8rem;
+                        font-weight: 300;
+                        letter-spacing: .08rem;
+                    }
+
+                    textarea {
+                        width: 95%;
+                        min-height: 8rem;
+                        height: 5rem;
+                        max-height: 30rem;
+                        padding-right: 1.5rem;
+
+                        overflow-y: auto;
+
+                        resize: none;
+                        border: none;
+                        background: rgba(163, 96, 51, 0.85);
+
+                        font-family: "Manrope", sans-serif;
+                        font-size: .8rem;
+                        font-weight: 300;
+                        letter-spacing: .08rem;
+
+                        color: rgba(0,0,0,.8);
+
+                        outline: none;
+
+                        transition:
+                            border-color .25s ease,
+                            background-color .25s ease,
+                            box-shadow .25s ease;
+
+                        &:focus {
+                            border-color: rgba(154,122,45,.65);
+                            background: rgba(163, 96, 51, 0.85);
+                        }
+
+                        &::placeholder {
+                            color: rgba(0,0,0,.65);
+                            text-transform: uppercase;
+                            letter-spacing: .22rem;
+                            font-weight: 300;
+                            font-size: .75rem;
+                            font-family: inherit;
+                        }
+
+                        &::-webkit-scrollbar {
+                            width: 8px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background: transparent;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            border-radius: 999px;
+                            background: rgba(224, 172, 51, 0.623);
+                        }
+                    }
+                }
+
+                .buttons {
+                    margin-top: 3rem;
+                    margin-bottom: 1rem;
+                    justify-content: space-around;
+
+                    button {
+                        padding: .2rem;
+                        border: 2px solid rgba(154,122,45,.55);
+                        border-radius: 5px;
+                        box-shadow: -4px 4px 8px rgba(0,0,0,.62);
+
+                        background: rgb(100, 122, 39);
+
+                        font-family: inherit;
+                        font-size: .7rem;
+                        font-weight: 600;
+                        letter-spacing: .22rem;
+                        text-transform: uppercase;
+
+                        color: rgba(255,255,255,.75);
+
+                        cursor: pointer;
+
+                        &:hover:not(:disabled) {
+                            background: rgba(236, 214, 105, 0.95);
+                            border-color: #9a7a2d;
+                            color: black;
+                            box-shadow: 0 4px 12px rgba(0,0,0,.12);
+                        }
+
+                        &:active:not(:disabled) {
+                            box-shadow: 0 2px 5px rgba(0,0,0,.1);
+                            background: rgb(114, 73, 20);
+                        }
+
+                        &:disabled {
+                            opacity: .35;
+                            cursor: default;
+                            background: black;
+                        }
+                    }
+
+                    .buttons__clear {
+                        background: rgb(122, 90, 54);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.space {
+    height: 100px;
+}
+
+.contact input[type="text"],
+.contact input[type="email"] {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,.45);
+
+    background: transparent;
+
+    padding: 0;
+
+    font-family: "Manrope", sans-serif;
+    font-size: .8rem;
+    font-weight: 300;
+    letter-spacing: .08rem;
+
+    color: rgba(0,0,0,.88);
+
+    outline: none;
+
+    transition:
+        border-color .25s ease,
+        opacity .25s ease;
+}
+
+.contact input[type="text"]:focus,
+.contact input[type="email"]:focus  {
+    border-bottom-color: black;
+    color: black;
+    background: transparent;
+}
+
+.contact input[type="text"]::placeholder,
+.contact input[type="email"]::placeholder  {
+    color: rgba(0,0,0,.95);
+    text-transform: uppercase;
+    letter-spacing: .22rem;
+    font-weight: 300;
+    font-size: .75rem;
+    font-family: inherit;
+}

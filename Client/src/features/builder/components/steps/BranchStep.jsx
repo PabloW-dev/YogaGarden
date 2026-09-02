@@ -4,8 +4,9 @@ import { useBuilder } from "../../../../contexts/useBuilder";
 import { getSuggestions } from "../../../../data/dataManager";
 import { buttonPositions, getChildPosition, layoutToVector, playPlusCamera, playBranchCamera, playChildCamera } from "../../engine/layoutEngine";
 import { createTimeline } from "../../engine/timelineEngine";
-import { openModal, closeModal, scheduleCloseModal, cancelCloseModal } from "../../../sharing/ui/modal";
+import { openModal, closeModal } from "../../../sharing/ui/modal";
 import { playBranchShrink } from "../../engine/treeEngine";
+import { useRef } from "react";
 
 
 export default function BranchStep({
@@ -34,6 +35,25 @@ export default function BranchStep({
   const remainingTime = seedData.duration - usedTime;
   const isUnderAllocated = remainingTime > 0;
 
+  const containerRef = useRef(null);
+
+  function scrollToBottomIfNeeded() {
+    requestAnimationFrame(() => {
+      const container = containerRef.current;
+
+      if (!container) return;
+
+      const isNearBottom =
+        container.scrollHeight -
+        container.scrollTop -
+        container.clientHeight < 300;
+
+      if (isNearBottom) {
+        container.scrollTop = container.scrollHeight;
+      }
+    });
+  }
+
   function getRandom(array, amount) {
     return [...array]
       .sort(() => Math.random() - 0.5)
@@ -54,7 +74,8 @@ export default function BranchStep({
           isCompleted: false,
           ui: {
             step: "initial",
-            sourceNumber: null
+            sourceNumber: null,
+            preselectedNumber: null
           },
           search: "",
           suggestions: {
@@ -128,7 +149,8 @@ export default function BranchStep({
 
           ui: {
             step: "transition",
-            sourceNumber: item.number
+            sourceNumber: item.number,
+            preselectedNumber: null
           },
 
           suggestions: {
@@ -140,6 +162,8 @@ export default function BranchStep({
     }));
 
     clearSectionSearch(id);
+
+    scrollToBottomIfNeeded();
   }
 
   function returnStep(id, buttonIndex) {
@@ -159,7 +183,8 @@ export default function BranchStep({
 
             ui: {
               step: "initial",
-              sourceNumber: null
+              sourceNumber: null,
+              preselectedNumber: null
             },
 
             suggestions: {
@@ -198,7 +223,8 @@ export default function BranchStep({
 
           ui: {
             step: "transition",
-            sourceNumber: lastItem.number
+            sourceNumber: lastItem.number,
+            preselectedNumber: null
           },
 
           suggestions: {
@@ -233,6 +259,8 @@ export default function BranchStep({
       startSection(section);
 
       await timeline.wait(20);
+
+      scrollToBottomIfNeeded();
 
       return;
 
@@ -368,6 +396,8 @@ export default function BranchStep({
       updateScene,
       ChildPosition: chain[lastIndex]
     });
+
+    scrollToBottomIfNeeded();
     
   }
 
@@ -469,6 +499,83 @@ export default function BranchStep({
     setTransition(false);
   }
 
+  function handleItemClick({
+    sectionId,
+    item,
+    suggestionIndex,
+    group,
+    sectionChain,
+    buttonIndex,
+    shouldAdd = true
+  }) {
+    const section = branchData.sections[sectionId];
+
+    const isPreselected =
+      section.ui.preselectedNumber === item.number;
+
+    if (!isPreselected) {
+      setBranchData(prev => ({
+        sections: {
+          ...prev.sections,
+          [sectionId]: {
+            ...prev.sections[sectionId],
+            ui: {
+              ...prev.sections[sectionId].ui,
+              preselectedNumber: item.number
+            }
+          }
+        }
+      }));
+
+      openModal(setModal, {
+        open: true,
+        type: "item",
+        payload: {
+          ...item,
+          onClose: () => {
+            setBranchData(prev => ({
+              sections: {
+                ...prev.sections,
+                [sectionId]: {
+                  ...prev.sections[sectionId],
+                  ui: {
+                    ...prev.sections[sectionId].ui,
+                    preselectedNumber: null
+                  }
+                }
+              }
+            }));
+          }
+        } 
+      });
+
+      return;
+    }
+
+    closeModal(setModal, modal);
+
+    if (!shouldAdd) return;
+
+    addToChain({
+      sectionId,
+      item,
+      suggestionIndex,
+      group,
+      sectionChain,
+      buttonIndex
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="branch-step"
         style={{
@@ -478,7 +585,10 @@ export default function BranchStep({
         }}
     >
 
-      <div className="branch-step__container">
+      <div 
+        ref={containerRef}
+        className="branch-step__container"
+      >
         {isUnderAllocated && (
         <p className="warning branch-step__warning">
           ⚠ There are <span>{remainingTime}</span> min still unallocated
@@ -541,36 +651,35 @@ export default function BranchStep({
             </button>
 
             <div className="branch-step__section--chain">
-              {progress?.chain.map((item) => (
-                <div
-                  key={item.instanceId}
-                  onMouseEnter={() => {
-                    cancelCloseModal({ modal, item })
-                    
-                    if (modal.open) return;
+              {progress?.chain.map((item) => {
+                const isPreselected = progress?.ui?.preselectedNumber === item.number;
 
-                    openModal(setModal, {
-                      open: true,
-                      type: "item",
-                      payload: item
-                    })
-                  }}
-                  onMouseLeave={() => 
-                    scheduleCloseModal(setModal)
-                  }
-                >
-                  
-                  <button
-                    disabled
+                return (
+                  <div
+                    key={item.instanceId}
                   >
-                    {item.img ? (
-                      <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
-                    ) : (
-                      <span className="placeholder">⬛</span>
-                    )}
-                  </button>
-                </div>
-              ))}
+                    
+                    <button className={isPreselected ? "preselected" : ""}
+                      onPointerDown={(e) => e.stopPropagation()}
+                      onClick={() => handleItemClick({
+                        sectionId: s.id,
+                        item,
+                        suggestionIndex: null,
+                        group,
+                        sectionChain: progress?.chain ?? [],
+                        buttonIndex: index,
+                        shouldAdd: false
+                      })}
+                    >
+                      {item.img ? (
+                        <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
+                      ) : (
+                        <span className="placeholder">⬛</span>
+                      )}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             {isActive && (
@@ -654,35 +763,20 @@ export default function BranchStep({
                   {progress?.chain.length === 0 && (
                     <div className="branch-step__section--is">
                       {initialSuggestions.map((item, suggestionIndex) => {
-                          
-                        return (
-                          <button
-                            key={item.id}
-                            onMouseEnter={() => {
-                              cancelCloseModal({ modal, item })
-                              
-                              if (modal.open) return;
+                        const isPreselected = progress?.ui?.preselectedNumber === item.number;
 
-                              openModal(setModal, {
-                                open: true,
-                                type: "item",
-                                payload: item
-                              })
-                            }}
-                            onMouseLeave={() => 
-                              scheduleCloseModal(setModal)
-                            }
-                            onClick={() => { 
-                              closeModal(setModal);
-                              addToChain({ 
-                                sectionId: s.id, 
-                                item,
-                                suggestionIndex,
-                                group,
-                                sectionChain: progress?.chain ?? [],
-                                buttonIndex: index 
-                              });
-                            }}
+                        return (
+                          <button className={isPreselected ? "preselected" : ""}
+                            key={item.id}
+                            onPointerDown={(e) => e.stopPropagation()}
+                            onClick={() => handleItemClick({
+                              sectionId: s.id,
+                              item,
+                              suggestionIndex,
+                              group,
+                              sectionChain: progress?.chain ?? [],
+                              buttonIndex: index
+                            })}
                           >
                             {item.img ? (
                               <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
@@ -699,7 +793,10 @@ export default function BranchStep({
                             type="text" 
                             placeholder="⌕"
                             value={searchValue}
-                            onChange={(e) => setSectionSearch(s.id, e.target.value)}
+                            onChange={(e) => {
+                              setSectionSearch(s.id, e.target.value);
+                              scrollToBottomIfNeeded();
+                            }}  
                           />
                         )}
 
@@ -715,34 +812,21 @@ export default function BranchStep({
                           </svg>
                         )}
 
-                        {isSearching && searchResults.map((item, suggestionIndex) => (
-                          <button
-                            key={item.id}
-                            onMouseEnter={() => {
-                              cancelCloseModal({ modal, item })
-                              
-                              if (modal.open) return;
+                        {isSearching && searchResults.map((item, suggestionIndex) => {
+                          const isPreselected = progress?.ui?.preselectedNumber === item.number;
 
-                              openModal(setModal, {
-                                open: true,
-                                type: "item",
-                                payload: item
-                              })
-                            }}
-                            onMouseLeave={() => 
-                              scheduleCloseModal(setModal)
-                            }
-                            onClick={() => { 
-                              closeModal(setModal);
-                              addToChain({ 
-                                sectionId: s.id, 
-                                item,
-                                suggestionIndex,
-                                group,
-                                sectionChain: progress?.chain ?? [],
-                                buttonIndex: index 
-                              });
-                            }}
+                          return (
+                          <button className={isPreselected ? "preselected" : ""}
+                            key={item.id}
+                            onPointerDown={(e) => e.stopPropagation()}
+                            onClick={() => handleItemClick({
+                              sectionId: s.id,
+                              item,
+                              suggestionIndex,
+                              group,
+                              sectionChain: progress?.chain ?? [],
+                              buttonIndex: index
+                            })}
                           >
                             {item.img ? (
                               <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
@@ -750,41 +834,29 @@ export default function BranchStep({
                               <span className="placeholder">⬛</span>
                             )}
                           </button>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   )}
 
                   {progress?.chain.length > 0 && canContinue && (
                     <div className="branch-step__section--is">
-                      {!isFull && !isLocked && nextSuggestions.map((item, suggestionIndex) => (
-                        <button
+                      {!isFull && !isLocked && nextSuggestions.map((item, suggestionIndex) => {
+                        const isPreselected = progress?.ui?.preselectedNumber === item.number;
+
+                        return (
+                        <button className={isPreselected ? "preselected" : ""}
                           key={item.id}
-                          onMouseEnter={() => {
-                            cancelCloseModal({ modal, item })
-                            
-                            if (modal.open) return;
-                              
-                            openModal(setModal, {
-                              open: true,
-                              type: "item",
-                              payload: item
-                            })
-                          }}
-                          onMouseLeave={() => 
-                            scheduleCloseModal(setModal)
-                          }
-                          onClick={() => { 
-                            closeModal(setModal);
-                            addToChain({ 
-                              sectionId: s.id, 
+                          onPointerDown={(e) => e.stopPropagation()}
+                          onClick={() => handleItemClick({
+                              sectionId: s.id,
                               item,
                               suggestionIndex,
                               group,
                               sectionChain: progress?.chain ?? [],
                               buttonIndex: index
-                            });
-                          }}
+                            })}
                           >
                             {item.img ? (
                               <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
@@ -792,7 +864,8 @@ export default function BranchStep({
                               <span className="placeholder">⬛</span>
                             )}
                           </button>
-                        ))}
+                        );
+                        })}
 
                       <div>
                         {!isFull && !isLocked && (
@@ -800,7 +873,10 @@ export default function BranchStep({
                             type="text" 
                             placeholder="⌕"
                             value={searchValue}
-                            onChange={(e) => setSectionSearch(s.id, e.target.value)}
+                            onChange={(e) => {
+                              setSectionSearch(s.id, e.target.value);
+                              scrollToBottomIfNeeded();
+                            }}
                           />
                         )}
 
@@ -816,34 +892,21 @@ export default function BranchStep({
                           </svg>
                         )}
 
-                        {isSearching && !isFull && searchResults.map((item, suggestionIndex) => (
-                          <button
-                            key={item.id}
-                            onMouseEnter={() => {
-                              cancelCloseModal({ modal, item })
-                              
-                              if (modal.open) return;
+                        {isSearching && !isFull && searchResults.map((item, suggestionIndex) => {
+                          const isPreselected = progress?.ui?.preselectedNumber === item.number;
 
-                              openModal(setModal, {
-                                open: true,
-                                type: "item",
-                                payload: item
-                              })
-                            }}
-                            onMouseLeave={() => 
-                              scheduleCloseModal(setModal)
-                            }
-                            onClick={() => { 
-                              closeModal(setModal);
-                              addToChain({ 
-                                sectionId: s.id, 
-                                item,
-                                suggestionIndex,
-                                group,
-                                sectionChain: progress?.chain ?? [],
-                                buttonIndex: index
-                              });
-                            }}
+                          return (
+                          <button className={isPreselected ? "preselected" : ""}
+                            key={item.id}
+                            onPointerDown={(e) => e.stopPropagation()}
+                            onClick={() => handleItemClick({
+                              sectionId: s.id,
+                              item,
+                              suggestionIndex,
+                              group,
+                              sectionChain: progress?.chain ?? [],
+                              buttonIndex: index
+                            })}
                           >
                             {item.img ? (
                               <span className={`technique-icon ${item.img === "ॐ" ? "unicode-icon" : ""}`}>{item.img}</span>
@@ -851,7 +914,8 @@ export default function BranchStep({
                               <span className="placeholder">⬛</span>
                             )}
                           </button>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   )}

@@ -1,5 +1,6 @@
 .modal {
     position: fixed;
+    overflow: hidden;
     width: 320px;
     min-height: 200px;
     max-height: 400px;
@@ -23,8 +24,6 @@
 
     box-shadow: 
         0 18px 45px rgba(0,0,0,0.32);
-
-    overflow-y: auto;
 
     h2 {
         
@@ -75,7 +74,7 @@
         color: rgba(0,0,0,.7);
     }
 
-    button {
+    button:not(.modal__close) {
 
         margin-bottom: 1rem;
         border: none;
@@ -103,29 +102,54 @@
         }
     }
 
-    &__related {
-        display: flex;
-        flex-direction: column;
-        gap: .7rem;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
+    &__content {
+        overflow-y: auto;
+        height: 100%;
+        width: 100%;
+        padding-right: 2rem;
 
-    &__info {
-        position: relative;
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
 
-        &:before {
-            content: "";
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
-            position: absolute;
+        &::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            background: rgba(154,122,45,.35);
 
-            top: 20%;
-            bottom: 5%;
-            left: -1rem;
+            &:hover {
+                background: rgba(154,122,45,.55);
+            }
+        }
 
-            width: 1px;
+        &--related {
+            display: flex;
+            flex-direction: column;
+            gap: .7rem;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
 
-            background: rgba(154,122,45,.45);
+        &--info {
+            position: relative;
+            margin-top: 2rem;
+
+            &:before {
+                content: "";
+
+                position: absolute;
+
+                top: 20%;
+                bottom: 5%;
+                left: -1rem;
+
+                width: 1px;
+
+                background: rgba(154,122,45,.45);
+            }
         }
     }
 
@@ -140,20 +164,54 @@
         color: rgba(0,0,0,.7);
     }
 
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
+    
 
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
+     &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10;
 
-    &::-webkit-scrollbar-thumb {
-        border-radius: 999px;
-        background: rgba(154,122,45,.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &:hover {
-            background: rgba(154,122,45,.55);
+        width: 2rem;
+        height: 2rem;
+
+        padding: 0;
+        border: 1px solid rgba(154, 122, 45, .55);
+        border-radius: 50%;
+
+        background: none;
+        color: #332D26;
+
+        font-size: 1.4rem;
+        line-height: 1;
+
+        cursor: pointer;
+
+        transition:
+            background-color .2s ease,
+            border-color .2s ease,
+            color .2s ease,
+            font-size .2s ease,
+            transform .2s ease;
+
+        &:hover,
+        &:focus-visible {
+            background: #E3AE68;
+            border-color: #9a7a2d;
+            color: #332D26;
+            font-size: 1.5rem;
+            transform:
+                
+                scale(1.2);
+        }
+
+        &:active {
+            font-size: 1.4rem;
+            transform: scale(1);
         }
     }
 }

@@ -1,0 +1,45 @@
+.FAB-BtT {
+    position: fixed;
+
+    right: 6%;
+    bottom: 5%;
+
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    pointer-events: none;
+    user-select: none;
+
+    transition: opacity .25s ease;
+
+    border-radius: 50%;
+    border: 2px solid rgb(61, 91, 156);
+    background: rgb(32, 41, 82);
+    
+
+
+    font-size: 2rem;
+    span {
+        margin-bottom: .5rem;
+    }
+
+    transition: transform .25s ease;
+
+    &.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+        border: 3px solid rgb(189, 161, 38);
+    }
+}

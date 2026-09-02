@@ -124,7 +124,7 @@ export default function TreeStep({ transition }) {
       <div className="tree-step__warning">
         {usedTime !== seedData.duration && (
           <p className="warning">
-            ⚠ Sections use <span>{usedTime}</span> min but class duration is <span>{seedData.duration}</span> min
+            ⚠ <span>Sections use {usedTime} min but class duration is {seedData.duration} min</span>
           </p>
         )}
 

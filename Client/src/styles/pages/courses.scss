@@ -1,0 +1,232 @@
+.courses {
+    width: 100%;
+    color: #332D26;
+
+    h2,
+    h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 500;
+        letter-spacing: .2rem;
+        line-height: 1.05;
+    }
+
+    p {
+        font-size: .95rem;
+        line-height: 1.8;
+        opacity: .82;
+    }
+
+    &__header {
+        width: 80%;
+        margin: 0 auto;
+        padding: 5rem 0 3rem;
+
+        h2 {
+            margin: 0 0 3rem;
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        &--tools {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 3rem;
+        }
+
+        &--tools-SCH {
+            width: 45%;
+            
+            input {
+                width: 100%;
+                // resto igual...
+            }
+        }
+
+        &--tools-FTR,
+        &--tools-SRT {
+            position: relative;
+            display: flex;
+            align-items: space-around;
+            gap: 2rem;
+
+            > p {
+                margin: 0;
+                font-family: "Cormorant Garamond", serif;
+                font-size: 1.25rem;
+                letter-spacing: .08rem;
+                opacity: 1;
+            }
+
+            > button {
+                min-width: 45px;
+                height: 38px;
+                border: 1px solid rgba(51, 45, 38, .35);
+                border-radius: 3px;
+                background: transparent;
+                color: #332D26;
+                font-family: inherit;
+                font-size: .9rem;
+                cursor: pointer;
+                transition:
+                    background-color .25s ease,
+                    border-color .25s ease;
+
+                &:hover {
+                    background: rgba(227, 174, 104, .2);
+                    border-color: #9a7a2d;
+                }
+            }
+        }
+
+        &--tools-RNG,
+        &--tools-SET {
+            position: absolute;
+            top: calc(100% + 1rem);
+            right: 0;
+            z-index: 10;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, .95);
+            border: 1px solid rgba(51, 45, 38, .15);
+            border-radius: 3px;
+        }
+
+        &--tools-RNG {
+            width: 250px;
+
+            > div + div {
+                margin-top: 1.5rem;
+            }
+
+            p {
+                margin: 0 0 .5rem;
+            }
+
+            input {
+                width: 100%;
+            }
+
+            > button {
+                display: block;
+                width: 100%;
+                margin-top: 1.5rem;
+                padding: .65rem 1rem;
+                border: 1px solid rgba(51, 45, 38, .3);
+                border-radius: 3px;
+                background: transparent;
+                color: #332D26;
+                font-family: inherit;
+                font-size: .85rem;
+                letter-spacing: .08rem;
+                cursor: pointer;
+                transition:
+                    background-color .25s ease,
+                    border-color .25s ease,
+                    color .25s ease;
+
+                &:hover {
+                    background: #332D26;
+                    border-color: #332D26;
+                    color: white;
+                }
+            }
+        }
+
+        &--tools-SET {
+            select {
+                border: none;
+                outline: none;
+                background: transparent;
+                color: #332D26;
+                font-family: inherit;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__body {
+        width: 80%;
+        margin: 0 auto;
+        padding: 3rem 0 7rem;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5rem 2rem;
+    }
+
+    &__card {
+        min-width: 0;
+        padding: .8rem;
+        border: 1px solid transparent;
+        border-radius: 4px;
+
+        transition:
+            transform .3s ease,
+            border-color .3s ease,
+            box-shadow .3s ease;
+
+        &:hover {
+            transform: scale(1.035);
+            border-color: rgba(154, 122, 45, .65);
+            box-shadow: 0 10px 25px rgba(51, 45, 38, .12);
+        }
+
+        h3 {
+            margin: 0 0 .5rem;
+            font-size: 1.7rem;
+        }
+
+        > p {
+            margin: 0 0 1rem;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+
+        > div {
+            display: flex;
+            justify-content: space-between;
+            margin-top: .8rem;
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+
+    &__pagination {
+        grid-column: 1 / -1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+        margin-top: 2rem;
+
+        button {
+            min-width: 36px;
+            height: 36px;
+            border: 1px solid rgba(51, 45, 38, .3);
+            background: transparent;
+            color: #332D26;
+            font-family: inherit;
+            cursor: pointer;
+
+            &:hover:not(:disabled),
+            &.is-active {
+                background: #332D26;
+                color: white;
+            }
+
+            &:disabled {
+                opacity: .3;
+                cursor: default;
+            }
+        }
+    }
+}
